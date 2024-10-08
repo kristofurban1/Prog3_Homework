@@ -1,3 +1,9 @@
 {
-    "java.configuration.updateBuildConfiguration": "interactive"
+    "maven.terminal.favorites": [
+        {
+            "alias": "asd",
+            "command": "asd"
+        }
+    ],
+    "maven.view": "flat"
 }
