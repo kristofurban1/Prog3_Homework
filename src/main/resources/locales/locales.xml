@@ -1,0 +1,9 @@
+<locales>    
+    <!-- 
+        Default locale should have attribute "default". 
+        The arrtibute given does not matter. 
+        More locales with attribute "default" is undefiend behavoiur. 
+    -->
+    <locale name="en" default="true">English</locale>
+    <!--<locale name="hu">Magyar</locale>-->
+</locales>
