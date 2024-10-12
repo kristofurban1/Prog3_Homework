@@ -9,16 +9,13 @@ import java.awt.Dimension;
 
 import javax.swing.*;
 
-public class FileDialog extends JDialog{
+public class FileDialog extends JDialog {
+
+    
 
     private static FileDialog dialog = null;
 
-
-    JPanel windowPanel = new JPanel();
-
-    TopPanel topPanel = new TopPanel();
-    SidePanel sidePanel = new SidePanel();
-    CenterPanel centerPanel = new CenterPanel();
+    WindowPanel windowPanel = new WindowPanel();
 
     private void guiBuilder(){
         setMinimumSize(new Dimension(750, 500));
@@ -27,17 +24,15 @@ public class FileDialog extends JDialog{
         setAlwaysOnTop(true);
         setFocusable(true);
         windowPanel.setPreferredSize(getSize());
-        windowPanel.setLayout(new BorderLayout(2, 2));
+        windowPanel.setLayout(new BorderLayout());
         windowPanel.setBackground(new Color(100, 100, 100));
 
-
-        topPanel.initialize(windowPanel);
-        sidePanel.initialize(windowPanel);
-        centerPanel.initialize(windowPanel);
-        
-        add(windowPanel, BorderLayout.CENTER);
-        
+        windowPanel.initilaize(this);
+        revalidate();
+        repaint();
         setVisible(true);
+
+        
     }
     private FileDialog(){
         super(new JFrame());

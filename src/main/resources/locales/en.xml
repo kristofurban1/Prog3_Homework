@@ -2,7 +2,7 @@
     <string ID="Title">Window Title</string>
     <string ID="Btn">OpenDialog</string>
     <string ID="FileDialog_WindowName">File Dialog</string> 
-    <string ID="FileDialog_Navigate">Go</string> 
-    <string ID="FileDialog_NavigateBack">^</string> 
+    <string ID="FileDialog_Navigate">Goasd</string> 
+    <string ID="FileDialog_NavigateBack">^asd</string> 
     <string ID="FileDialog_PathLabel">Path: </string> 
 </strings>

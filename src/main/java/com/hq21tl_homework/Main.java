@@ -3,10 +3,6 @@ package com.hq21tl_homework;
 import com.hq21tl_homework.file_dialog.*;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-
-import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 
 public class Main {
