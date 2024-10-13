@@ -9,6 +9,8 @@ public class FolderContentPanel extends JPanel{
     public void initialize(JComponent parent, JDialog root){
         setBackground(Color.RED);
 
+        revalidate();
+        repaint();
         parent.add(this, BorderLayout.CENTER);
     }
 }

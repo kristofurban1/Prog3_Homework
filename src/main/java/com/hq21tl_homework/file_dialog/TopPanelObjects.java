@@ -61,8 +61,6 @@ public class TopPanelObjects {
 
     public static class PathInputField extends JTextField implements Locales.LocalizationChangeListener{
         public void initialize(JComponent parent, JDialog root){
-            
-
             parent.add(this, BorderLayout.CENTER);
         }
 
@@ -79,7 +77,6 @@ public class TopPanelObjects {
             parentComponent = parent;
             setHorizontalAlignment(SwingConstants.CENTER);
             setVerticalAlignment(SwingConstants.CENTER);
-            setBorder(BorderFactory.createEmptyBorder(5, 5, 10, 5));
             updateDimension();
             parentComponent.add(this, BorderLayout.EAST);
 
@@ -94,6 +91,7 @@ public class TopPanelObjects {
 
         private void updateDimension(){
             if (parentComponent == null) return;
+            setBorder(BorderFactory.createEmptyBorder(5, 5, 10, 5));
             setText(">");
             setPreferredSize(new Dimension(
                 (int)(parentComponent.getPreferredSize().width * .05), 

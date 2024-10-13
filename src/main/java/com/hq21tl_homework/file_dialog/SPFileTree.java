@@ -12,6 +12,9 @@ public class SPFileTree extends JPanel {
     public void initialize(JComponent parent, JDialog root){
         setPreferredSize(null);
         setBackground(Color.GREEN.darker());
+        
+        revalidate();
+        repaint();
         parent.add(this);
     }
     

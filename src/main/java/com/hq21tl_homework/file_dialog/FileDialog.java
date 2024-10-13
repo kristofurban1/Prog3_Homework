@@ -6,6 +6,7 @@ import com.hq21tl_homework.file_dialog.Panels.*;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.ComponentEvent;
 
 import javax.swing.*;
 
@@ -27,12 +28,18 @@ public class FileDialog extends JDialog {
         windowPanel.setLayout(new BorderLayout());
         windowPanel.setBackground(new Color(100, 100, 100));
 
-        windowPanel.initilaize(this);
         revalidate();
         repaint();
+        windowPanel.initilaize(this);
+        setSize(getMinimumSize());
         setVisible(true);
 
-        
+        ComponentEvent resizeEvent = new ComponentEvent(this, ComponentEvent.COMPONENT_RESIZED);
+        dispatchEvent(resizeEvent);
+
+        setSize(getMinimumSize().width + 10, getMinimumSize().height + 10);
+        revalidate();
+        repaint();
     }
     private FileDialog(){
         super(new JFrame());

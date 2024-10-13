@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 
 import javax.swing.*;
 
@@ -25,13 +26,15 @@ public class Panels {
         public void initialize(JComponent parent, JDialog root){
             setLayout(new BorderLayout());
             setBackground(Color.YELLOW.darker());
+            
+            revalidate();
+            repaint();
 
             inputField.initialize(this, root);
-
-            localizationChanged();
             add(pathLabel, BorderLayout.WEST);
             parent.add(this, BorderLayout.CENTER);
-
+            
+            localizationChanged();
         }
         @Override
         public void localizationChanged() {
@@ -51,10 +54,11 @@ public class Panels {
             setLayout(new BorderLayout());
             setBackground(Color.YELLOW);
             
-            setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
-            backBt.initialize(this, root);
+            revalidate();
+            repaint();
             pathPanel.initialize(this, root);
             goBtn.initialize(this, root);
+            backBt.initialize(this, root);
             
             parent.add(this, BorderLayout.NORTH);
             root.addComponentListener(new ComponentAdapter() {
@@ -66,6 +70,8 @@ public class Panels {
         }
 
         private void updateDimension(){
+            if (parentComponent == null) return;
+            setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
             setPreferredSize(new Dimension(
                 parentComponent.getPreferredSize().width,
                 (int)(parentComponent.getPreferredSize().height * .1)            
@@ -92,7 +98,9 @@ public class Panels {
             }
             assert tp != null;
             updateDimension();
-
+            
+            revalidate();
+            repaint();
             fileTree.initialize(this, root);
 
             parent.add(this, BorderLayout.WEST);
@@ -105,6 +113,7 @@ public class Panels {
         }
         
         private void updateDimension(){
+            if (parentComponent == null) return;
             setPreferredSize(new Dimension(
                 (int)(parentComponent.getPreferredSize().width * .2),       
                 parentComponent.getPreferredSize().height - tp.getPreferredSize().height
@@ -118,25 +127,36 @@ public class Panels {
         private final ConfirmButton confirmButton = new ConfirmButton();
         private final CancelButton cancelButton = new CancelButton();
 
+        private JComponent parentComponent = null;
         public void initialize(JComponent parent, JDialog root){
+            parentComponent = parent;
             setLayout(new BorderLayout(5, 5));
             setBackground(Color.BLUE.darker());
 
-            setPreferredSize(new Dimension(
-                parent.getPreferredSize().width,
-                (int)(parent.getPreferredSize().height * .10)            
-                ));
-            setPreferredSize(new Dimension(
-                parent.getPreferredSize().width,
-                parent.getPreferredSize().height           
-            ));
-
+            revalidate();
+            repaint();
             inputField.initialize(this, root);
             confirmButton.initialize(this, root);
             cancelButton.initialize(this, root);
             
+            updateDimension();
+
             parent.add(this, BorderLayout.SOUTH);
+            root.addComponentListener(new ComponentAdapter() {
+                @Override
+                public void componentResized(ComponentEvent e) {
+                    updateDimension();
+                }
+            });
         }
+        private void updateDimension(){
+            if (parentComponent == null) return;
+            setPreferredSize(new Dimension(
+                parentComponent.getPreferredSize().width,
+                (int)(parentComponent.getPreferredSize().height * .8)            
+                ));
+        }
+
 
     }
 
@@ -148,8 +168,11 @@ public class Panels {
             setLayout(new BorderLayout(1,1));
             setBackground(Color.BLUE);
 
+            revalidate();
+            repaint();
             folderContentPanel.initialize(this, root);
             bottomPanel.initialize(this, root);
+            
             setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
             parent.add(this, BorderLayout.CENTER);
             
@@ -164,6 +187,8 @@ public class Panels {
         
         public void initilaize(JDialog parent){
             
+            revalidate();
+            repaint();
             topPanel.initialize(this, parent);
             sidePanel.initialize(this, parent);
             centerPanel.initialize(this, parent);
