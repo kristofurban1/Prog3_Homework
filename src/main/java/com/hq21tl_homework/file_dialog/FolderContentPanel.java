@@ -1,13 +1,12 @@
 package com.hq21tl_homework.file_dialog;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 
 import javax.swing.*;
 
 public class FolderContentPanel extends JPanel{
-    public void initialize(JComponent parent, JDialog root){
+    public void initialize(JComponent parent, MyFileDialog root){
         setBackground(Color.RED);
 
         GridBagConstraints constraints = new GridBagConstraints();

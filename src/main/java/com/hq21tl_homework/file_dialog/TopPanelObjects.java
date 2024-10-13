@@ -2,12 +2,9 @@ package com.hq21tl_homework.file_dialog;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -18,9 +15,7 @@ public class TopPanelObjects {
     private TopPanelObjects() {}
 
     public static class NavigateBackBtn extends JButton implements ActionListener, Locales.LocalizationChangeListener{
-        private JComponent parentComponent = null;
-        public void initialize(JComponent parent, JDialog root){
-            parentComponent = parent;
+        public void initialize(JComponent parent, MyFileDialog root){
 
             setHorizontalAlignment(SwingConstants.CENTER);
             setVerticalAlignment(SwingConstants.CENTER);
@@ -37,41 +32,15 @@ public class TopPanelObjects {
             parent.add(this, constraints);
             addActionListener(this);
 
-            /* 
-             * 
-             root.addComponentListener(new ComponentAdapter() {
-                @Override
-                public void componentResized(ComponentEvent e) {
-                    updateDimension();
-                }
-            });
-            */
         } 
 
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println(e.toString());
         }
-        /*
-         * 
-         private void updateDimension(){
-            if (parentComponent == null) return;
-            setText("^");
-            
-            setMinimumSize(getPreferredSize());
-            setPreferredSize(new Dimension(
-                (int)(parentComponent.getPreferredSize().width * .05), 
-                parentComponent.getPreferredSize().height
-                ));
-                
-                if (getMinimumSize().width > getPreferredSize().width)
-                setPreferredSize(getMinimumSize());
-            }
-            
-            */
         @Override
         public void localizationChanged() {
-           //updateDimension();
+            
         }
 
     }
@@ -80,7 +49,7 @@ public class TopPanelObjects {
         private final JLabel pathLabel = new JLabel();
         private final JTextField inputField = new JTextField();
 
-        public void initialize(JComponent parent, JDialog root){
+        public void initialize(JComponent parent, MyFileDialog root){
             setLayout(new BorderLayout());
             setBackground(Color.YELLOW.darker());
             setBorder(new EmptyBorder(8,5,8,5));
@@ -107,7 +76,7 @@ public class TopPanelObjects {
 
     public static class NavigateGoBtn extends JButton implements ActionListener, Locales.LocalizationChangeListener{
         private JComponent parentComponent = null;
-        public void initialize(JComponent parent, JDialog root){
+        public void initialize(JComponent parent, MyFileDialog root){
             parentComponent = parent;
             setHorizontalAlignment(SwingConstants.CENTER);
             setVerticalAlignment(SwingConstants.CENTER);
@@ -125,31 +94,7 @@ public class TopPanelObjects {
             parent.add(this, constraints);
 
             addActionListener(this);
-            /*
-             * 
-             root.addComponentListener(new ComponentAdapter() {
-                @Override
-                public void componentResized(ComponentEvent e) {
-                    updateDimension();
-                }
-            });
-            */
         }
-        /*
-         * 
-         private void updateDimension(){
-            if (parentComponent == null) return;
-            setBorder(BorderFactory.createEmptyBorder(5, 5, 10, 5));
-            setText(">");
-            setPreferredSize(new Dimension(
-                (int)(parentComponent.getPreferredSize().width * .05), 
-                parentComponent.getPreferredSize().height
-                ));
-                
-                if (getMinimumSize().width > getPreferredSize().width)
-                setPreferredSize(getMinimumSize());
-            }
-            */
 
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -159,7 +104,7 @@ public class TopPanelObjects {
 
         @Override
         public void localizationChanged() {
-            //updateDimension();   
+            
         }
     }
     

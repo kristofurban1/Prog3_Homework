@@ -2,20 +2,13 @@ package com.hq21tl_homework.file_dialog;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
-import java.io.Console;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-import com.hq21tl_homework.Locales;
 import com.hq21tl_homework.file_dialog.TopPanelObjects.*;
 import com.hq21tl_homework.file_dialog.BottomPanelObjects.*;
 
@@ -24,14 +17,11 @@ public class Panels {
     private Panels() {}
 
     public static class TopPanel extends JPanel{
-        //private JComponent parentComponent; 
-
         private final NavigateBackBtn backBt = new NavigateBackBtn();
         private final PathPanel pathPanel = new PathPanel();
         private final NavigateGoBtn goBtn = new NavigateGoBtn();
         
-        public void initialize(JComponent parent, JDialog root){
-            //parentComponent = parent;
+        public void initialize(JComponent parent, MyFileDialog root){
             setLayout(new GridBagLayout());
             setBackground(Color.YELLOW);
             setBorder(new EmptyBorder(2,5,2,5));
@@ -50,54 +40,15 @@ public class Panels {
             constraints.weightx = 1;
 
             parent.add(this, constraints);
-            /*
-            * 
-            root.addComponentListener(new ComponentAdapter() {
-                @Override
-                public void componentResized(ComponentEvent e) {
-                    updateDimension();
-                }
-            });
-            */
         }
-
-        /*
-         * 
-         private void updateDimension(){
-            if (parentComponent == null) return;
-            setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
-            setPreferredSize(new Dimension(
-                parentComponent.getPreferredSize().width,
-                (int)(parentComponent.getPreferredSize().height * .1)            
-                ));
-            }
-            */
     }
         
     public static class SidePanel extends JPanel {
-        JComponent parentComponent;
-        TopPanel tp = null;
         SPFileTree fileTree = new SPFileTree();
 
-        public void initialize(JComponent parent, JDialog root){
-            parentComponent = parent;
+        public void initialize(JComponent parent, MyFileDialog root){
             setLayout(new FlowLayout());
             setBackground(Color.GREEN);
-            /*
-             * 
-             Component[] comps = parent.getComponents();
-             for(Component c : comps){
-                if (c instanceof TopPanel topPanel){
-                    tp = topPanel;
-                    break;
-                }
-            }
-            assert tp != null;
-            updateDimension();
-            
-            revalidate();
-            repaint();
-            */
             
             fileTree.initialize(this, root);
 
@@ -109,27 +60,7 @@ public class Panels {
             constraints.weighty = 1;
 
             parent.add(this, constraints);
-            /*
-            * 
-            root.addComponentListener(new ComponentAdapter() {
-                @Override
-                public void componentResized(ComponentEvent e) {
-                    updateDimension();
-                }
-            });
-            */
         }
-        /*
-         * 
-         private void updateDimension(){
-            if (parentComponent == null) return;
-            setPreferredSize(new Dimension(
-                (int)(parentComponent.getPreferredSize().width * .2),       
-                parentComponent.getPreferredSize().height - tp.getPreferredSize().height
-                ));
-            }
-        */
-
     }
     
     public static class BottomPanel extends JPanel {
@@ -137,9 +68,7 @@ public class Panels {
         private final ConfirmButton confirmButton = new ConfirmButton();
         private final CancelButton cancelButton = new CancelButton();
 
-        private JComponent parentComponent = null;
-        public void initialize(JComponent parent, JDialog root){
-            parentComponent = parent;
+        public void initialize(JComponent parent, MyFileDialog root){
             setLayout(new BorderLayout(5, 5));
             setBackground(Color.BLUE.darker());
 
@@ -147,7 +76,6 @@ public class Panels {
             confirmButton.initialize(this, root);
             cancelButton.initialize(this, root);
             
-            //updateDimension();
             GridBagConstraints constraints = new GridBagConstraints();
             constraints.gridx = 0;
             constraints.gridy = 1;
@@ -163,7 +91,7 @@ public class Panels {
         private final BottomPanel bottomPanel = new BottomPanel();
         private final FolderContentPanel folderContentPanel = new FolderContentPanel();
 
-        public void initialize(JComponent parent, JDialog root){
+        public void initialize(JComponent parent, MyFileDialog root){
             setLayout(new GridBagLayout());
             setBackground(Color.BLUE);
 
@@ -187,7 +115,7 @@ public class Panels {
         SidePanel sidePanel = new SidePanel();
         CenterPanel centerPanel = new CenterPanel();
         
-        public void initilaize(JDialog parent){
+        public void initilaize(MyFileDialog parent){
             
             setPreferredSize(parent.getSize());
             setLayout(new GridBagLayout());
