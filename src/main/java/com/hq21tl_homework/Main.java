@@ -17,7 +17,7 @@ public class Main {
         
         JButton button = new JButton(Locales.getString("Btn"));
         button.addActionListener((e) -> {
-            FileDialog.openDialog();
+            FileDialog.openDialog(frame);
         });
 
         frame.add(button);

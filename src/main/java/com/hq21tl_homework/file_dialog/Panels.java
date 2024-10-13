@@ -5,11 +5,15 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.io.Console;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 import com.hq21tl_homework.Locales;
 import com.hq21tl_homework.file_dialog.TopPanelObjects.*;
@@ -19,64 +23,55 @@ import com.hq21tl_homework.file_dialog.BottomPanelObjects.*;
 public class Panels {
     private Panels() {}
 
-    public static class PathPanel extends JPanel implements Locales.LocalizationChangeListener{
-        private final JLabel pathLabel = new JLabel();
-        private final PathInputField inputField = new PathInputField();
-
-        public void initialize(JComponent parent, JDialog root){
-            setLayout(new BorderLayout());
-            setBackground(Color.YELLOW.darker());
-            
-            revalidate();
-            repaint();
-
-            inputField.initialize(this, root);
-            add(pathLabel, BorderLayout.WEST);
-            parent.add(this, BorderLayout.CENTER);
-            
-            localizationChanged();
-        }
-        @Override
-        public void localizationChanged() {
-            pathLabel.setText(Locales.getString("FileDialog_PathLabel"));
-        }
-    }
-
     public static class TopPanel extends JPanel{
-        private JComponent parentComponent; 
+        //private JComponent parentComponent; 
 
         private final NavigateBackBtn backBt = new NavigateBackBtn();
         private final PathPanel pathPanel = new PathPanel();
         private final NavigateGoBtn goBtn = new NavigateGoBtn();
         
         public void initialize(JComponent parent, JDialog root){
-            parentComponent = parent;
-            setLayout(new BorderLayout());
+            //parentComponent = parent;
+            setLayout(new GridBagLayout());
             setBackground(Color.YELLOW);
+            setBorder(new EmptyBorder(2,5,2,5));
             
-            revalidate();
-            repaint();
             pathPanel.initialize(this, root);
             goBtn.initialize(this, root);
             backBt.initialize(this, root);
-            
-            parent.add(this, BorderLayout.NORTH);
+
+            GridBagConstraints constraints = new GridBagConstraints();
+            constraints.gridx = 0;
+            constraints.gridy = 0;
+            constraints.gridheight = 1;
+            constraints.gridwidth = 2;
+            constraints.fill = GridBagConstraints.BOTH;
+            constraints.weighty = 0.05;
+            constraints.weightx = 1;
+
+            parent.add(this, constraints);
+            /*
+            * 
             root.addComponentListener(new ComponentAdapter() {
                 @Override
                 public void componentResized(ComponentEvent e) {
                     updateDimension();
                 }
             });
+            */
         }
 
-        private void updateDimension(){
+        /*
+         * 
+         private void updateDimension(){
             if (parentComponent == null) return;
             setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
             setPreferredSize(new Dimension(
                 parentComponent.getPreferredSize().width,
                 (int)(parentComponent.getPreferredSize().height * .1)            
                 ));
-        }
+            }
+            */
     }
         
     public static class SidePanel extends JPanel {
@@ -88,9 +83,10 @@ public class Panels {
             parentComponent = parent;
             setLayout(new FlowLayout());
             setBackground(Color.GREEN);
-
-            Component[] comps = parent.getComponents();
-            for(Component c : comps){
+            /*
+             * 
+             Component[] comps = parent.getComponents();
+             for(Component c : comps){
                 if (c instanceof TopPanel topPanel){
                     tp = topPanel;
                     break;
@@ -101,24 +97,38 @@ public class Panels {
             
             revalidate();
             repaint();
+            */
+            
             fileTree.initialize(this, root);
 
-            parent.add(this, BorderLayout.WEST);
+            GridBagConstraints constraints = new GridBagConstraints();
+            constraints.gridx = 0;
+            constraints.gridy = 1;
+            constraints.fill = GridBagConstraints.BOTH;
+            constraints.weightx = 0.15;
+            constraints.weighty = 1;
+
+            parent.add(this, constraints);
+            /*
+            * 
             root.addComponentListener(new ComponentAdapter() {
                 @Override
                 public void componentResized(ComponentEvent e) {
                     updateDimension();
                 }
             });
+            */
         }
-        
-        private void updateDimension(){
+        /*
+         * 
+         private void updateDimension(){
             if (parentComponent == null) return;
             setPreferredSize(new Dimension(
                 (int)(parentComponent.getPreferredSize().width * .2),       
                 parentComponent.getPreferredSize().height - tp.getPreferredSize().height
                 ));
-        }
+            }
+        */
 
     }
     
@@ -133,31 +143,20 @@ public class Panels {
             setLayout(new BorderLayout(5, 5));
             setBackground(Color.BLUE.darker());
 
-            revalidate();
-            repaint();
             inputField.initialize(this, root);
             confirmButton.initialize(this, root);
             cancelButton.initialize(this, root);
             
-            updateDimension();
+            //updateDimension();
+            GridBagConstraints constraints = new GridBagConstraints();
+            constraints.gridx = 0;
+            constraints.gridy = 1;
+            constraints.fill = GridBagConstraints.BOTH;
+            constraints.weightx = 1;
+            constraints.weighty = 0.2;
 
-            parent.add(this, BorderLayout.SOUTH);
-            root.addComponentListener(new ComponentAdapter() {
-                @Override
-                public void componentResized(ComponentEvent e) {
-                    updateDimension();
-                }
-            });
+            parent.add(this, constraints);  
         }
-        private void updateDimension(){
-            if (parentComponent == null) return;
-            setPreferredSize(new Dimension(
-                parentComponent.getPreferredSize().width,
-                (int)(parentComponent.getPreferredSize().height * .8)            
-                ));
-        }
-
-
     }
 
     public static class CenterPanel extends JPanel {
@@ -165,17 +164,20 @@ public class Panels {
         private final FolderContentPanel folderContentPanel = new FolderContentPanel();
 
         public void initialize(JComponent parent, JDialog root){
-            setLayout(new BorderLayout(1,1));
+            setLayout(new GridBagLayout());
             setBackground(Color.BLUE);
 
-            revalidate();
-            repaint();
             folderContentPanel.initialize(this, root);
             bottomPanel.initialize(this, root);
-            
-            setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
-            parent.add(this, BorderLayout.CENTER);
-            
+
+            GridBagConstraints constraints = new GridBagConstraints();
+            constraints.gridx = 1;
+            constraints.gridy = 1;
+            constraints.fill = GridBagConstraints.BOTH;
+            constraints.weightx = 1;
+            constraints.weighty = 1;
+
+            parent.add(this, constraints);            
         }
         
     }
@@ -187,8 +189,10 @@ public class Panels {
         
         public void initilaize(JDialog parent){
             
-            revalidate();
-            repaint();
+            setPreferredSize(parent.getSize());
+            setLayout(new GridBagLayout());
+            setBackground(new Color(100, 0, 100));
+
             topPanel.initialize(this, parent);
             sidePanel.initialize(this, parent);
             centerPanel.initialize(this, parent);
