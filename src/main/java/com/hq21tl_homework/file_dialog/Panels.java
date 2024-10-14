@@ -2,15 +2,19 @@ package com.hq21tl_homework.file_dialog;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
-import javax.swing.*;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import com.hq21tl_homework.file_dialog.TopPanelObjects.*;
-import com.hq21tl_homework.file_dialog.BottomPanelObjects.*;
+import com.hq21tl_homework.file_dialog.BottomPanelObjects.CancelButton;
+import com.hq21tl_homework.file_dialog.BottomPanelObjects.ConfirmButton;
+import com.hq21tl_homework.file_dialog.BottomPanelObjects.FileNameInputField;
+import com.hq21tl_homework.file_dialog.TopPanelObjects.NavigateBackBtn;
+import com.hq21tl_homework.file_dialog.TopPanelObjects.NavigateGoBtn;
+import com.hq21tl_homework.file_dialog.TopPanelObjects.PathPanel;
 
 
 public class Panels {
@@ -47,7 +51,7 @@ public class Panels {
         SPFileTree fileTree = new SPFileTree();
 
         public void initialize(JComponent parent, MyFileDialog root){
-            setLayout(new FlowLayout());
+            setLayout(new GridBagLayout());
             setBackground(Color.GREEN);
             
             fileTree.initialize(this, root);
@@ -68,10 +72,12 @@ public class Panels {
         private final ConfirmButton confirmButton = new ConfirmButton();
         private final CancelButton cancelButton = new CancelButton();
 
-        public void initialize(JComponent parent, MyFileDialog root){
-            setLayout(new BorderLayout(5, 5));
-            setBackground(Color.BLUE.darker());
+        public FileNameInputField getFileNameInputField() { return inputField; }
 
+        public void initialize(JComponent parent, MyFileDialog root){
+            setLayout(new GridBagLayout());
+            setBackground(Color.BLUE.darker());
+            setBorder(new EmptyBorder(10,10,10,10));
             inputField.initialize(this, root);
             confirmButton.initialize(this, root);
             cancelButton.initialize(this, root);
@@ -81,7 +87,7 @@ public class Panels {
             constraints.gridy = 1;
             constraints.fill = GridBagConstraints.BOTH;
             constraints.weightx = 1;
-            constraints.weighty = 0.2;
+            constraints.weighty = 0.005;
 
             parent.add(this, constraints);  
         }

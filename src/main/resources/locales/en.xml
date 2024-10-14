@@ -5,4 +5,6 @@
     <string ID="FileDialog_Navigate">Goasd</string> 
     <string ID="FileDialog_NavigateBack">^asd</string> 
     <string ID="FileDialog_PathLabel">Path: </string> 
+    <string ID="FileDialog_Confirm">OK</string> 
+    <string ID="FileDialog_Cancel">Cancel</string> 
 </strings>

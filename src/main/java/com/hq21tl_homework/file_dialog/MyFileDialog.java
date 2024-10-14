@@ -1,32 +1,71 @@
 package com.hq21tl_homework.file_dialog;
 
-import com.hq21tl_homework.file_dialog.Panels.*;
-
 import java.awt.Dialog;
 import java.awt.Dimension;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.swing.*;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+
+import com.hq21tl_homework.file_dialog.Panels.WindowPanel;
 
 public class MyFileDialog extends JDialog {
+    public static interface FilePathChangeListener {
+        void filePathChanged();
+    }
+    public static class FilePathChangeEventHandler {
+        private final List<FilePathChangeListener> listeners = new ArrayList<>();
 
-    private String path = null;
-    private String selectedFile = null;
+        // Method to add listeners
+        public void addValueChangeListener(FilePathChangeListener listener) {
+            listeners.add(listener);
+        }
+
+        // Method to remove listeners
+        public void removeValueChangeListener(FilePathChangeListener listener) {
+            listeners.remove(listener);
+        }
+        // Fire event to all registered listeners
+        public void fireFilePathChanged() {
+            for (FilePathChangeListener listener : listeners) {
+                listener.filePathChanged();
+            }
+        }
+    }
+    
+
+    private final FilePathChangeEventHandler eventHandler = new FilePathChangeEventHandler(); //NOSONAR // This will not be under such load that it would require serialiation.
+    public FilePathChangeEventHandler getEventHandler() {return eventHandler; }
+
+    private File inputFile;
+
+    public File getFile(){
+        return inputFile;
+    }
+
+    public void setFile(File file){
+        inputFile = file;
+        eventHandler.fireFilePathChanged();
+    }
+
+    public String getDirectoryPath(){
+        if (inputFile == null) return null;
+        if (inputFile.isDirectory()) return inputFile.getAbsolutePath();
+        return inputFile.getParent();
+    }
 
     public String getPath() {
-        return path;
+        if (inputFile == null) return null;
+        return inputFile.getAbsolutePath();
     }
 
     public void setPath(String path) {
-        this.path = path;
-    }
-    
-    public String getSelectedFile() {
-        return selectedFile;
+        this.inputFile = new File(path);
+        eventHandler.fireFilePathChanged();
     }
 
-    public void setSelectedFile(String selectedFile) {
-        this.selectedFile = selectedFile;
-    }
 
     WindowPanel windowPanel = new WindowPanel();
 
@@ -47,11 +86,12 @@ public class MyFileDialog extends JDialog {
         guiBuilder();
     }
 
-    public String openDialog(String path){
+    public File openDialog(String path){
+        if (path == null || path.isBlank())
+            path = System.getProperty("user.dir");
+        
         setPath(path);
         setVisible(true);
-        return null;
+        return getFile();
     }
-
-    
 }
