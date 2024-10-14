@@ -1,0 +1,26 @@
+Recept könyv
+
+Egy recept tároló és megjelenítő alkalmazás.
+A cél egy felhasználóbarát alkalmazás amiben egyszerűen létrhozhatunk ételeknek recept bejegyzést, és ezt utánna elkészítése közben felhazsnálhatjuk mint utasításkészlet.
+
+Komponensek:
+ - Új recept hozzáadása, szerkeztése, törlése. 
+ - Recept megjelenítése, receptek között keresés, meglévő összetevők alapján keresés.
+ - Receptönyv export és importálása.
+
+Egy bejegyzés részei:
+ - Minden ételnek van egy neve, ami alapján kereshetjük a recepteket, minden ételnek lehetnek alternatív receptjei.ű
+ - Egy ételhez lehet adni ismertetőt ami egy egyedi kis bemutatója az ételünkenk.
+ - Minden összetevő egy egyedi listába kerül, így ha két recept ugyan azt az összetevőt használja, egyszerüen kiválasztjuk a listából. Minden összetevőnek egyedi mennyiséget és mértékegységet adhatunk.
+ - Minden receptnek van leírása ami az elkészítéshez szükséges pontokra lépésiből áll.
+
+Import/Export:
+ - A recetkönyv egészének vagy részének egy tömörített állományba helyezése, vagy betöltése, amivel nagymennyiségben lehet recepteket mozgatni receptkönyvek között, vagy biztonsági mentést tartani egy teljes állományról.
+ - A betöltés nem feltétlen teljes, receptek hozzáadására is alkalmazható.
+    - Recept ütközések esetén:
+        - Két teljesen megeggyező recept: A duplikált nem kerül hozzáadásra.
+        - Az ételnév eggyezik, de a receept tartalma más: A felhasználó értesítve lesz, elvetheti, felülírhatja vagy hozzáadhatja alternatív receptként.
+        - A recept összetevőinek listái is megeggyeznek, csak az útmutató tér el: A felhasználó értesítve lesz, elvetheti vagy felülírhatja a leírást, avagy hozzáadhatja alternatív receptként.
+    - Összetevők amik nem voltak a felhasználó eddigi listáján (Ez az opció ignorálható egy gombnyomásra) felsorolásra kerülnek hogyha esetleg az importált receptben más néven volt feltüntetve ugyan az az összetevő. A felhasználó itt átnevezheti ezeket.
+        - Ez nem változtatja meg a leírásban hogyan vannak feltüntetve. Ezért a felülírt összetevő nevet feljegyezzük hopgy a kéíöbbiekben ne kelljen megismétewlni ugyan ezt, valamint megtekinthetjük ha a recept leírása ezzel összezavaró lesz.
+            - (Magyarázat: Saját összetevő x1 volt, az importáltban x2. A recept összetevőiben x1 van jelen, de x2 van a leírásban. x1-től le tudjuk kérdezni alternmatív neveit hogy biztosra mehesssünk.)
