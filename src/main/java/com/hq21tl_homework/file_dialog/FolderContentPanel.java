@@ -2,52 +2,67 @@ package com.hq21tl_homework.file_dialog;
 
 import java.awt.Color;
 import java.awt.GridBagConstraints;
-import java.awt.image.BufferedImage;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 
 import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneLayout;
+import javax.swing.border.LineBorder;
 import javax.swing.filechooser.FileSystemView;
 
 import com.hq21tl_homework.file_dialog.MyFileDialog.FilePathChangeListener;
 
-public class FolderContentPanel extends JScrollPane implements FilePathChangeListener{
+public class FolderContentPanel extends JPanel implements FilePathChangeListener, MouseListener{
 
     public static class FileEntry extends JPanel{
         private File thisFile = null;
-        public void setThisFile(File file) { 
+        private boolean selected = false;
+
+        private Icon icon;
+        private final JLabel label = new JLabel();
+        public FileEntry(File file, JComponent parent, boolean selected){
+            super();
             thisFile = file; 
-            Icon got = FileSystemView.getFileSystemView().getSystemIcon(file);
-            BufferedImage img = new BufferedImage(icon.getIconHeight(), icon.getIconHeight(), BufferedImage.TYPE_INT_RGB);
-            icon.paintIcon(null, img.getGraphics(), 0, 0);
-            icon.setImage(img);
-            label.setText(file.getName());
+            icon = FileSystemView.getFileSystemView().getSystemIcon(file);
+            this.selected = selected;
+
+            setLayout(new GridBagLayout());
+            if (selected){
+                setBorder(new LineBorder(Color.BLUE, 2));
+                setBackground(new Color(10,10,200, 20));
+            }
+
+            GridBagConstraints constraints = new GridBagConstraints();
+            constraints.fill = GridBagConstraints.BOTH;
+            label.setIcon(icon);
+            label.setText(thisFile.getName());
+            constraints.gridx = 0;
+            constraints.gridy = 0;
+            constraints.weightx = 1;
+            constraints.weighty = 1;
+            add(label, constraints);
+
+            addMouseListener((MouseListener)parent);
         }
 
-        private ImageIcon icon = new ImageIcon();
-        private JLabel label = new JLabel();
-        public void initialize(JComponent parent, MyFileDialog root){
-
+        public File getFile(){
+            return thisFile;
         }
     }
 
-    JLabel testLabel = new JLabel();
     MyFileDialog root = null;
     public void initialize(JComponent parent, MyFileDialog root){
         this.root = root;
         setBackground(Color.RED);
-        setLayout(new ScrollPaneLayout());
-        add(testLabel);
-
-
-        setWheelScrollingEnabled(true);
-        setVerticalScrollBar(new JScrollBar());
+        setLayout(new GridLayout(1, 5));
+        JScrollPane scrollPane = new JScrollPane(this);
+        scrollPane.setWheelScrollingEnabled(true);
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
@@ -56,12 +71,58 @@ public class FolderContentPanel extends JScrollPane implements FilePathChangeLis
         constraints.weightx = 1;
         constraints.weighty = 1;
 
-        parent.add(this, constraints);  
+        parent.add(scrollPane, constraints);
         root.getEventHandler().addValueChangeListener(this);
     }
 
     @Override
     public void filePathChanged() {
-        testLabel.setText(root.getPath());
+        File current = root.getFile();
+        if (current == null) return; 
+        File dir = null;
+        if (current.isDirectory()){
+            dir = current;
+            current = null;
+        }
+        else{
+            dir = current.getParentFile();
+        }
+
+        File[] files = dir.listFiles();
+        int neededRows = ((files.length - 1) % 5) + 1;
+        removeAll();
+        setLayout(new GridLayout(neededRows, 5));
+
+        System.out.println("Dir " + dir.getAbsolutePath());
+        for (File file : files) {
+            FileEntry entry = new FileEntry(file, this, file.equals(current));
+            entry.addMouseListener(this);
+            
+            System.out.println("Initialized " + file.getName());
+        }
     }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        if (!(e.getSource() instanceof FileEntry)) {
+            //TODO: Error
+            System.out.println("FD_FCP_Mouse Click not on FileEntry");
+            return;
+        }
+        FileEntry clicked = (FileEntry)e.getSource();
+
+        System.out.println("ClickedEntry: " + clicked.getFile().getName());
+        root.setFile(clicked.getFile());
+        
+    }
+    @Override
+    public void mouseEntered(MouseEvent e) {}
+    @Override
+    public void mouseExited(MouseEvent e) {}
+    @Override
+    public void mousePressed(MouseEvent e) {}
+    @Override
+    public void mouseReleased(MouseEvent e) {}
+
+    
 }
