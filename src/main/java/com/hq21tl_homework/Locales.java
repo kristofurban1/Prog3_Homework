@@ -1,11 +1,6 @@
 package com.hq21tl_homework;
 
 import java.io.FileNotFoundException;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -14,6 +9,9 @@ import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 
 import com.hq21tl_homework.Utils.KeyValuePair;
@@ -104,11 +102,12 @@ public class Locales {
         // Constructs a Locles object, this can only be called by the static Instance member of Locales.
         try {
             // Parsing an XML with org.w3c.dom package
-            Document doc;
+            Document doc = null;
             String filename = LOCALES_FOLDER + LOCALES_AVAILABLE;
             try ( 
                     InputStream resourceStream = getClass().getClassLoader().getResourceAsStream(filename)) {
-                doc = Utils.xmlParser(resourceStream);
+                if (resourceStream != null)
+                    doc = Utils.xmlParser(resourceStream);
             }
             if (doc == null) throw new FileNotFoundException(String.format(ERRMSG_FILE_NOT_FOUND, filename));
             

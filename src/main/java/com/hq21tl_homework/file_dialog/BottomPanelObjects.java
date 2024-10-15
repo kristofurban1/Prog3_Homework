@@ -9,7 +9,6 @@ import java.io.File;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JTextField;
-import javax.swing.RootPaneContainer;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -55,28 +54,31 @@ public class BottomPanelObjects {
         }
         
         private void textChanged(){
-            if (root.getFile() == null) {
+            return;
+            /* 
+             * 
+             if (root.getFile() == null) {
                 return;
             }
             root.setPath(root.getDirectoryPath() + getText());
+            */
             
         }
 
         @Override
         public void filePathChanged() {
-            return;
-            /* 
-             * 
              if (root.getFile() == null) {
                 setText("");
                 return;
             }
-            setText(root.getFile().getName());
-            */
+            if (root.getFile().isDirectory())
+                setText("");
+            else
+                setText(root.getFile().getName());
         }
     }
 
-    public static class ConfirmButton extends JButton implements ActionListener, MyFileDialog.FilePathChangeListener, Locales.LocalizationChangeListener{
+    public static class ConfirmButton extends JButton implements ActionListener, Locales.LocalizationChangeListener{
         private JComponent parentComponent = null;
         private MyFileDialog root = null;
         public void initialize(JComponent parent, MyFileDialog root){
@@ -92,7 +94,6 @@ public class BottomPanelObjects {
             parent.add(this, constraints);
             
             addActionListener(this);
-            root.getEventHandler().addValueChangeListener(this);
             Locales.eventHandler.addValueChangeListener(this);
             localizationChanged();
         }
@@ -105,17 +106,18 @@ public class BottomPanelObjects {
                 setEnabled(false);
                 return;
             }
-            
-            File withInputField = new File(root.getDirectoryPath() + ((BottomPanel)parentComponent).getFileNameInputField());
-            if (withInputField.isDirectory()){
-                setEnabled(false);
-                return;
+            if (root.getFile().isDirectory()){
+                String filename = ((BottomPanel)parentComponent).getFileNameInputField().getText();
+                if (filename.isBlank()){
+                    //TODO: ErrorMsg
+                    System.out.println("FileDialog_PathIsNotFile");
+                    return;
+                }
+                String dirPath = root.getPath();
+                String path = dirPath + "\\" + filename;
+                root.setPath(path);
             }
             root.dispose();
-        }
-        @Override
-        public void filePathChanged() {
-            setEnabled(!root.getFile().isDirectory()); // if directory, disable. Else enable.
         }
         @Override
         public void localizationChanged() {

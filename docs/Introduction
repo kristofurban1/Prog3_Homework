@@ -6,10 +6,12 @@ A cél egy felhasználóbarát alkalmazás amiben egyszerűen létrhozhatunk ét
 Komponensek:
  - Új recept hozzáadása, szerkeztése, törlése. 
  - Recept megjelenítése, receptek között keresés, meglévő összetevők alapján keresés.
+ - Recept kategóriák és azok szűrése.
+ - Értékelések.
  - Receptönyv export és importálása.
 
 Egy bejegyzés részei:
- - Minden ételnek van egy neve, ami alapján kereshetjük a recepteket, minden ételnek lehetnek alternatív receptjei.ű
+ - Minden ételnek van egy neve, ami alapján kereshetjük a recepteket, minden ételnek lehetnek alternatív receptjei.
  - Egy ételhez lehet adni ismertetőt ami egy egyedi kis bemutatója az ételünkenk.
  - Minden összetevő egy egyedi listába kerül, így ha két recept ugyan azt az összetevőt használja, egyszerüen kiválasztjuk a listából. Minden összetevőnek egyedi mennyiséget és mértékegységet adhatunk.
  - Minden receptnek van leírása ami az elkészítéshez szükséges pontokra lépésiből áll.
