@@ -8,4 +8,7 @@ public class IngredientStorage {
     public void newIngredient(String name){
         if (!ingredients.contains(name)) ingredients.add(name);
     }
+    public String[] getIngridients(){
+        return ingredients.toArray(String[]::new);
+    }
 }
