@@ -1,18 +1,21 @@
 package com.hq21tl_homework.file_dialog;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 
+import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.filechooser.FileSystemView;
 
@@ -21,6 +24,8 @@ import com.hq21tl_homework.file_dialog.MyFileDialog.FilePathChangeListener;
 public class FolderContentPanel extends JPanel implements FilePathChangeListener, MouseListener{
 
     public static class FileEntry extends JPanel{
+
+        
         private File thisFile = null;
         private boolean selected = false;
 
@@ -32,23 +37,20 @@ public class FolderContentPanel extends JPanel implements FilePathChangeListener
             icon = FileSystemView.getFileSystemView().getSystemIcon(file);
             this.selected = selected;
 
-            setLayout(new GridBagLayout());
+            setLayout(new BorderLayout());
             if (selected){
                 setBorder(new LineBorder(Color.BLUE, 2));
                 setBackground(new Color(10,10,200, 20));
             }
-
-            GridBagConstraints constraints = new GridBagConstraints();
-            constraints.fill = GridBagConstraints.BOTH;
+            setMaximumSize(new Dimension(10,10));
+            label.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
             label.setIcon(icon);
             label.setText(thisFile.getName());
-            constraints.gridx = 0;
-            constraints.gridy = 0;
-            constraints.weightx = 1;
-            constraints.weighty = 1;
-            add(label, constraints);
-
-            addMouseListener((MouseListener)parent);
+            label.setHorizontalTextPosition(SwingConstants.CENTER);
+            label.setVerticalTextPosition(SwingConstants.BOTTOM);
+            label.setVerticalAlignment(SwingConstants.TOP);
+            label.setHorizontalAlignment(SwingConstants.CENTER);
+            add(label, BorderLayout.CENTER);
         }
 
         public File getFile(){
@@ -89,17 +91,23 @@ public class FolderContentPanel extends JPanel implements FilePathChangeListener
         }
 
         File[] files = dir.listFiles();
-        int neededRows = ((files.length - 1) % 5) + 1;
+        int neededRows = ((files.length - 1) / 10) + 1;
         removeAll();
         setLayout(new GridLayout(neededRows, 5));
+        
+        validate();
+        doLayout();
 
         System.out.println("Dir " + dir.getAbsolutePath());
         for (File file : files) {
             FileEntry entry = new FileEntry(file, this, file.equals(current));
             entry.addMouseListener(this);
-            
-            System.out.println("Initialized " + file.getName());
+            add(entry);
+            //System.out.println("Initialized " + file.getName());
         }
+
+        revalidate();
+        repaint();
     }
 
     @Override
