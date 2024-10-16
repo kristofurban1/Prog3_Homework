@@ -2,26 +2,28 @@ package com.hq21tl_homework.file_dialog;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
-import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.Icon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.SwingConstants;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.filechooser.FileSystemView;
 
 import com.hq21tl_homework.file_dialog.MyFileDialog.FilePathChangeListener;
 
-public class FolderContentPanel extends JPanel implements FilePathChangeListener, MouseListener{
+public class FolderContentPanel extends JScrollPane implements FilePathChangeListener, MouseListener{
 
     public static class FileEntry extends JPanel{
 
@@ -37,19 +39,22 @@ public class FolderContentPanel extends JPanel implements FilePathChangeListener
             icon = FileSystemView.getFileSystemView().getSystemIcon(file);
             this.selected = selected;
 
-            setLayout(new BorderLayout());
+            //setLayout(new BorderLayout());
             if (selected){
                 setBorder(new LineBorder(Color.BLUE, 2));
                 setBackground(new Color(10,10,200, 20));
             }
-            setMaximumSize(new Dimension(10,10));
+            setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
+            setAlignmentX(Component.CENTER_ALIGNMENT);
+
+            label.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
             label.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
             label.setIcon(icon);
             label.setText(thisFile.getName());
-            label.setHorizontalTextPosition(SwingConstants.CENTER);
-            label.setVerticalTextPosition(SwingConstants.BOTTOM);
-            label.setVerticalAlignment(SwingConstants.TOP);
-            label.setHorizontalAlignment(SwingConstants.CENTER);
+            //label.setHorizontalTextPosition(SwingConstants.CENTER);
+            //label.setVerticalTextPosition(SwingConstants.BOTTOM);
+            //label.setVerticalAlignment(SwingConstants.TOP);
+            //label.setHorizontalAlignment(SwingConstants.CENTER);
             add(label, BorderLayout.CENTER);
         }
 
@@ -58,13 +63,15 @@ public class FolderContentPanel extends JPanel implements FilePathChangeListener
         }
     }
 
+    JPanel fileConent = new JPanel();
     MyFileDialog root = null;
     public void initialize(JComponent parent, MyFileDialog root){
         this.root = root;
         setBackground(Color.RED);
-        setLayout(new GridLayout(1, 5));
-        JScrollPane scrollPane = new JScrollPane(this);
-        scrollPane.setWheelScrollingEnabled(true);
+        //JScrollPane scrollPane = new JScrollPane(this);
+
+        setWheelScrollingEnabled(true);
+        setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
@@ -73,8 +80,10 @@ public class FolderContentPanel extends JPanel implements FilePathChangeListener
         constraints.weightx = 1;
         constraints.weighty = 1;
 
-        parent.add(scrollPane, constraints);
+        parent.add(this, constraints);
         root.getEventHandler().addValueChangeListener(this);
+
+        set
     }
 
     @Override
@@ -91,23 +100,26 @@ public class FolderContentPanel extends JPanel implements FilePathChangeListener
         }
 
         File[] files = dir.listFiles();
-        int neededRows = ((files.length - 1) / 10) + 1;
-        removeAll();
-        setLayout(new GridLayout(neededRows, 5));
+        //int neededRows = ((files.length - 1) / 10) + 1;
+        fileConent.removeAll();
+        //setLayout(new GridLayout(neededRows, 5));
+
+        fileConent.setLayout(new BoxLayout(fileConent, BoxLayout.Y_AXIS));
         
-        validate();
-        doLayout();
+        fileConent.validate();
+        fileConent.doLayout();
 
         System.out.println("Dir " + dir.getAbsolutePath());
         for (File file : files) {
+            
             FileEntry entry = new FileEntry(file, this, file.equals(current));
             entry.addMouseListener(this);
-            add(entry);
+            fileConent.add(entry);
             //System.out.println("Initialized " + file.getName());
         }
 
-        revalidate();
-        repaint();
+        fileConent.revalidate();
+        fileConent.repaint();
     }
 
     @Override

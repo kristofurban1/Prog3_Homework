@@ -23,6 +23,3 @@ Import/Export:
         - Két teljesen megeggyező recept: A duplikált nem kerül hozzáadásra.
         - Az ételnév eggyezik, de a receept tartalma más: A felhasználó értesítve lesz, elvetheti, felülírhatja vagy hozzáadhatja alternatív receptként.
         - A recept összetevőinek listái is megeggyeznek, csak az útmutató tér el: A felhasználó értesítve lesz, elvetheti vagy felülírhatja a leírást, avagy hozzáadhatja alternatív receptként.
-    - Összetevők amik nem voltak a felhasználó eddigi listáján (Ez az opció ignorálható egy gombnyomásra) felsorolásra kerülnek hogyha esetleg az importált receptben más néven volt feltüntetve ugyan az az összetevő. A felhasználó itt átnevezheti ezeket.
-        - Ez nem változtatja meg a leírásban hogyan vannak feltüntetve. Ezért a felülírt összetevő nevet feljegyezzük hopgy a kéíöbbiekben ne kelljen megismétewlni ugyan ezt, valamint megtekinthetjük ha a recept leírása ezzel összezavaró lesz.
-            - (Magyarázat: Saját összetevő x1 volt, az importáltban x2. A recept összetevőiben x1 van jelen, de x2 van a leírásban. x1-től le tudjuk kérdezni alternmatív neveit hogy biztosra mehesssünk.)

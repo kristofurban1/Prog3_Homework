@@ -4,13 +4,10 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JTextField;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 
 import com.hq21tl_homework.Locales;
 import com.hq21tl_homework.file_dialog.Panels.BottomPanel;
@@ -33,38 +30,7 @@ public class BottomPanelObjects {
             parent.add(this, constraints);
 
             root.getEventHandler().addValueChangeListener(this);
-
-            getDocument().addDocumentListener(new DocumentListener(){
-                @Override
-                public void changedUpdate(DocumentEvent e) {
-                    textChanged();
-                }
-
-                @Override
-                public void insertUpdate(DocumentEvent e) {
-                    textChanged();
-                }
-
-                @Override
-                public void removeUpdate(DocumentEvent e) {
-                    textChanged();
-                }
-
-            });
         }
-        
-        private void textChanged(){
-            return;
-            /* 
-             * 
-             if (root.getFile() == null) {
-                return;
-            }
-            root.setPath(root.getDirectoryPath() + getText());
-            */
-            
-        }
-
         @Override
         public void filePathChanged() {
              if (root.getFile() == null) {
@@ -152,6 +118,7 @@ public class BottomPanelObjects {
 
         @Override
         public void localizationChanged() {
+            root.setFile(null);
             setText(Locales.getString("FileDialog_Cancel"));
         }
     }
