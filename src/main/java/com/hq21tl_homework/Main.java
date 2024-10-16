@@ -3,12 +3,17 @@ package com.hq21tl_homework;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.io.File;
+import java.util.Arrays;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import com.hq21tl_homework.error_dialog.ErrorDialog;
+import com.hq21tl_homework.error_dialog.ErrorDialog.DialogBehaviour;
+import com.hq21tl_homework.error_dialog.ErrorDialog.DialogType;
+import com.hq21tl_homework.error_dialog.ErrorDialog.ErrorLevel;
 import com.hq21tl_homework.file_dialog.MyFileDialog;
 
 public class Main {
@@ -40,6 +45,19 @@ public class Main {
         frame.add(button);
         frame.add(label);
 
+
+        ErrorDialog errorDialog = new ErrorDialog(
+            new ErrorDialog.ErrorDialogSettings(
+                "Title", 
+                ErrorLevel.INFO, 
+                DialogType.YES_NO_CANCEL, 
+                DialogBehaviour.BLOCKING_DIALOG, 
+                "TestMessageTestMessageTestMessageTestMessageTestMessageTestMessageTestMessageTestMessageTestMessageTestMessageTestMessageTestMessageTestMessageTestMessageTestMessageTestMessageTestMessage", 
+                Arrays.toString(new Exception().getStackTrace()) + Arrays.toString(new Exception().getStackTrace()) + Arrays.toString(new Exception().getStackTrace()))
+            );
+        errorDialog.showError();
+
+        Locales.getString("nah");
 
         //Display the window.
         frame.setVisible(true);

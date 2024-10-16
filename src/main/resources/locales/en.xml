@@ -7,4 +7,9 @@
     <string ID="FileDialog_PathLabel">Path: </string> 
     <string ID="FileDialog_Confirm">OK</string> 
     <string ID="FileDialog_Cancel">Cancel</string> 
+
+    <string ID="ErrorDialog_OK">Ok</string> 
+    <string ID="ErrorDialog_Yes">Yes</string> 
+    <string ID="ErrorDialog_No">No</string> 
+    <string ID="ErrorDialog_Cancel">Cancel</string> 
 </strings>

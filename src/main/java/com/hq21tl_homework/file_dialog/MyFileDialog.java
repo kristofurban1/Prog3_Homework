@@ -72,7 +72,7 @@ public class MyFileDialog extends JDialog {
     private void guiBuilder(){
         setMinimumSize(new Dimension(750, 500));
         setSize(new Dimension(750, 500));
-        setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
         setFocusable(true);
         

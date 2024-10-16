@@ -15,6 +15,10 @@ import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 
 import com.hq21tl_homework.Utils.KeyValuePair;
+import com.hq21tl_homework.error_dialog.ErrorDialog;
+import com.hq21tl_homework.error_dialog.ErrorDialog.DialogBehaviour;
+import com.hq21tl_homework.error_dialog.ErrorDialog.DialogType;
+import com.hq21tl_homework.error_dialog.ErrorDialog.ErrorLevel;
 
 //EagerInitializedSingleton
 @SuppressWarnings("java:S6548") // Singleton is intentionally not exposing an instance.
@@ -88,8 +92,6 @@ public class Locales {
     private static final String ERRMSG_UNAVAILABLE_NO_LOCALES_LOADED = "File: " +LOCALES_FOLDER+LOCALES_AVAILABLE + " -- No locale entries in file.";
     private static final String ERRMSG_UNAVAILABLE_NO_LOCALE_FOUND = "File: " +LOCALES_FOLDER+LOCALES_AVAILABLE + " -- No locale entry \"%s\" in file.";
 
-    private static final String LOCALE_MISSING_STRING = "-- MISSING STRING --";
-
     // Array containing all available locales and their display names.
     private Utils.KeyValuePair<String, String>[] availableLocales = null;
 
@@ -97,6 +99,13 @@ public class Locales {
     private String selectedLocale;
     private HashMap<String, String> localeStringsMap = new HashMap<>();
 
+    
+    public Utils.KeyValuePair<String, String> getSelectedLocale(){
+        for (KeyValuePair<String,String> locale : availableLocales) {
+            if (selectedLocale.equals(locale.getKey())) return locale;
+        }
+        return null; // ILLEGAL STATE.
+    }
 
     private Locales(){
         // Constructs a Locles object, this can only be called by the static Instance member of Locales.
@@ -274,6 +283,21 @@ public class Locales {
         eventHandler.fireLocalizationChanged();
     }
     public static String getString(String key){
-        return instance.localeStringsMap.getOrDefault(key, LOCALE_MISSING_STRING);
+        if (!instance.localeStringsMap.containsKey(key)){
+            ErrorDialog.ErrorDialogSettings settings = new ErrorDialog.ErrorDialogSettings(
+                "Locales: Missing string", 
+                ErrorLevel.WARNING, 
+                DialogType.OK, DialogBehaviour.NON_BLOCKING_DIALOG, 
+                String.format("Missing string {%s} in locale %s(%s)", key, instance.getSelectedLocale().getKey(), instance.getSelectedLocale().getValue()), 
+                null);
+            ErrorDialog errDialog = new ErrorDialog(settings);
+            errDialog.showError();
+        }
+        return instance.localeStringsMap.get(key);        
+    }
+
+    public static String getStringOrDefault(String key, String defaultString){
+        if (instance == null) return defaultString;
+        return instance.localeStringsMap.getOrDefault(key, defaultString);
     }
 }
