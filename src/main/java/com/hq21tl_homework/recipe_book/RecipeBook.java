@@ -73,5 +73,6 @@ public class RecipeBook {
 
     public RecipeEntry[] filterRecipesByAvailableIngredients(String filter){
         //TODO
+        return new RecipeEntry[0];
     }
 }
