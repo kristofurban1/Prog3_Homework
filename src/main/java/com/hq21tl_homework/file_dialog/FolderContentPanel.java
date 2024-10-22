@@ -29,15 +29,13 @@ public class FolderContentPanel extends JScrollPane implements FilePathChangeLis
 
         
         private File thisFile = null;
-        private boolean selected = false;
-
         private Icon icon;
+        
         private final JLabel label = new JLabel();
         public FileEntry(File file, JComponent parent, boolean selected){
             super();
             thisFile = file; 
             icon = FileSystemView.getFileSystemView().getSystemIcon(file);
-            this.selected = selected;
 
             //setLayout(new BorderLayout());
             if (selected){
@@ -82,8 +80,6 @@ public class FolderContentPanel extends JScrollPane implements FilePathChangeLis
 
         parent.add(this, constraints);
         root.getEventHandler().addValueChangeListener(this);
-
-        set
     }
 
     @Override
@@ -100,22 +96,18 @@ public class FolderContentPanel extends JScrollPane implements FilePathChangeLis
         }
 
         File[] files = dir.listFiles();
-        //int neededRows = ((files.length - 1) / 10) + 1;
         fileConent.removeAll();
-        //setLayout(new GridLayout(neededRows, 5));
 
         fileConent.setLayout(new BoxLayout(fileConent, BoxLayout.Y_AXIS));
         
         fileConent.validate();
         fileConent.doLayout();
 
-        System.out.println("Dir " + dir.getAbsolutePath());
         for (File file : files) {
             
             FileEntry entry = new FileEntry(file, this, file.equals(current));
             entry.addMouseListener(this);
             fileConent.add(entry);
-            //System.out.println("Initialized " + file.getName());
         }
 
         fileConent.revalidate();
@@ -136,13 +128,21 @@ public class FolderContentPanel extends JScrollPane implements FilePathChangeLis
         
     }
     @Override
-    public void mouseEntered(MouseEvent e) {}
+    public void mouseEntered(MouseEvent e) {
+        // Added by MouseListener, unnesessery to implement.
+    }
     @Override
-    public void mouseExited(MouseEvent e) {}
+    public void mouseExited(MouseEvent e) {
+        // Added by MouseListener, unnesessery to implement.
+    }
     @Override
-    public void mousePressed(MouseEvent e) {}
+    public void mousePressed(MouseEvent e) {
+        // Added by MouseListener, unnesessery to implement.
+    }
     @Override
-    public void mouseReleased(MouseEvent e) {}
+    public void mouseReleased(MouseEvent e) {
+        // Added by MouseListener, unnesessery to implement.
+    }
 
     
 }
