@@ -1,6 +1,7 @@
 package com.hq21tl_homework.error_dialog;
 
 import java.awt.BorderLayout;
+import java.awt.Dialog;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -12,7 +13,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 
 import com.hq21tl_homework.error_dialog.DialogGUI.WindowPanel;
-import com.hq21tl_homework.error_dialog.ErrorDialog.DialogResult;
 
 public class ErrorDialog extends JDialog {
 
@@ -42,7 +42,7 @@ public class ErrorDialog extends JDialog {
         CLOSED
     }
 
-    Map<ErrorLevel, String> ErrorLevelIconPaths = Map.of(
+    private final Map<ErrorLevel, String> errorLevelIconPaths = Map.of(
             ErrorLevel.INFO, "error_dialog\\info.png",
             ErrorLevel.WARNING, "error_dialog\\warning.png",
             ErrorLevel.ERROR, "error_dialog\\error.png",
@@ -51,7 +51,7 @@ public class ErrorDialog extends JDialog {
 
     @SuppressWarnings("CallToPrintStackTrace") // Cannot show dialog if dialog fails...
     public ImageIcon getResource(ErrorLevel level) {
-        String resourcePath = ErrorLevelIconPaths.get(level);
+        String resourcePath = errorLevelIconPaths.get(level);
         if (resourcePath == null) {
             return null;
         }
@@ -97,6 +97,10 @@ public class ErrorDialog extends JDialog {
             setMinimumSize(new Dimension(400, 200));
         }
         setMaximumSize(getMinimumSize());
+
+        if (settings.dialogBehaviour == DialogBehaviour.BLOCKING_DIALOG)
+            setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+        else setModalityType(Dialog.ModalityType.MODELESS);
 
         setLayout(new BorderLayout());
         setTitle(settings.errorTitle);
