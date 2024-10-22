@@ -5,5 +5,5 @@
         More locales with attribute "default" is undefiend behavoiur. 
     -->
     <locale name="en" default="true">English</locale>
-    <!--<locale name="hu">Magyar</locale>-->
+    <locale name="hu">Magyar</locale>
 </locales>
