@@ -1,6 +1,5 @@
 package com.hq21tl_homework;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
