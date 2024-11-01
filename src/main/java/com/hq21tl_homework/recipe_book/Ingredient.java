@@ -22,4 +22,12 @@ public class Ingredient {
     public String getQuantifyer() {
         return quantifyer;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Ingredient ingr)
+            return name.equals(ingr.getName());
+        else return false;
+    }
+    
 }

@@ -9,7 +9,7 @@ import java.util.List;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 
-import com.hq21tl_homework.file_dialog.Panels.WindowPanel;
+import com.hq21tl_homework.file_dialog.FileDialogPanels.WindowPanel;
 
 public class MyFileDialog extends JDialog {
     public static interface FilePathChangeListener {

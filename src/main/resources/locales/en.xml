@@ -1,13 +1,46 @@
 <strings locale="en">
     <string ID="Title">Window Title</string>
     <string ID="Btn">OpenDialog</string>
-    <string ID="FileDialog_WindowName">File Dialog</string> 
-    <string ID="FileDialog_Navigate">Goasd</string> 
-    <string ID="FileDialog_NavigateBack">^asd</string> 
-    <string ID="FileDialog_PathLabel">Path: </string> 
-    <string ID="FileDialog_Confirm">OK</string> 
-    <string ID="FileDialog_Cancel">Cancel</string> 
+    
+    <string ID="WindowTitle">Recipe Book</string>
+    
+    <string ID="Menu_File">File</string>
+    <string ID="Menu_File_Import">Import</string>
+    <string ID="Menu_File_Export">Export</string>
+    <string ID="Menu_File_Preferences">Preferences</string>
+    <string ID="Menu_File_Exit">Exit</string>
 
+    <string ID="Menu_Recipe">Recipe</string>
+    <string ID="Menu_Recipe_AddRecipeEntry">Add Recipe Entry</string>
+    <string ID="Menu_Recipe_IngridientCollection">Ingridient Collection</string>
+    
+    <string ID="Searchbar_SearchLabel">Search:</string>
+    <string ID="Searchbar_RadioLabel">Select search type:</string>
+    <string ID="Searchbar_RadioName">Name</string>
+    <string ID="Searchbar_RadioCategory">Category</string>
+    <string ID="Searchbar_Search">Search</string>
+    <string ID="Searchbar_Clear">Clear</string>
+    <string ID="Searchbar_IngredientSearch">Ingredient Search</string>
+    
+    <string ID="StatusPanel_EntryCount">Number of entries: </string>
+    
+    <string ID="EntryContainer_Entry_View">View</string>
+    <string ID="EntryContainer_Entry_Edit">Edit</string>
+
+    <string ID="IngredientSelector_Title">Ingridient Selector</string>
+    <string ID="IngredientSelector_SearchBtn">Search</string>
+    <string ID="IngredientSelector_OkBtn">Ok</string>
+    <string ID="IngredientSelector_ToggleBtn">Toggle selection</string>
+
+    <!-- 
+        <string ID="FileDialog_WindowName">File Dialog</string> 
+        <string ID="FileDialog_Navigate">Goasd</string> 
+        <string ID="FileDialog_NavigateBack">^asd</string> 
+        <string ID="FileDialog_PathLabel">Path: </string> 
+        <string ID="FileDialog_Confirm">OK</string> 
+        <string ID="FileDialog_Cancel">Cancel</string> 
+    -->
+        
     <string ID="ErrorDialog_OK">Ok</string> 
     <string ID="ErrorDialog_Yes">Yes</string> 
     <string ID="ErrorDialog_No">No</string> 

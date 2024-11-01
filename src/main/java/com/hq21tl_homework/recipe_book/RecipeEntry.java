@@ -1,5 +1,8 @@
 package com.hq21tl_homework.recipe_book;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class RecipeEntry {
     private final String name;
     private final String category;
@@ -28,5 +31,22 @@ public class RecipeEntry {
 
     public Recipe[] getRecipes() {
         return recipes;
+    }
+
+    public boolean hasIngridients(List<String> filter){
+        for (Recipe recipe : recipes) {
+            if (recipe.hasIngridients(filter)) return true;
+        }
+        return false;
+    }
+    public String[] getIngredients(){
+        ArrayList<String> ingredients = new ArrayList<>();
+        for (Recipe recipe : recipes) {
+            for (Ingredient ingredient : recipe.getIngredients()) {
+                if (!ingredients.contains(ingredient.getName()))
+                    ingredients.add(ingredient.getName());
+            }
+        }
+        return ingredients.toArray(String[]::new);
     }
 }

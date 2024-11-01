@@ -1,14 +1,14 @@
 package com.hq21tl_homework.recipe_book;
 
+import java.util.List;
+
 public class Recipe {
     private final Ingredient[] ingredients;
     private final String[] instructions;
-    private final Rating[] ratings;
 
-    public Recipe(Ingredient[] ingredients, String[] instructions, Rating[] ratings){
+    public Recipe(Ingredient[] ingredients, String[] instructions){
         this.ingredients = ingredients;
         this.instructions = instructions;
-        this.ratings = ratings;
     }
 
     public Ingredient[] getIngredients() {
@@ -19,17 +19,10 @@ public class Recipe {
         return instructions;
     }
 
-    public Rating[] getRatings() {
-        return ratings;
-    }
-
-    public float getAvarageRating(){
-        if (ratings.length == 0) return 0;
-        
-        int sum = 0;
-        for (Rating rating : ratings) {
-            sum += rating.getRating();
+    public boolean hasIngridients(List<String> filter){
+        for (Ingredient ingredient : ingredients) {
+            if (!filter.contains(ingredient.getName())) return false;
         }
-        return sum / (float)ratings.length;
+        return true;
     }
 }

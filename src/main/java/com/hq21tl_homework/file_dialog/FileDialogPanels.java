@@ -17,8 +17,8 @@ import com.hq21tl_homework.file_dialog.TopPanelObjects.NavigateGoBtn;
 import com.hq21tl_homework.file_dialog.TopPanelObjects.PathPanel;
 
 
-public class Panels {
-    private Panels() {}
+public class FileDialogPanels {
+    private FileDialogPanels() {}
 
     public static class TopPanel extends JPanel{
         private final NavigateBackBtn backBt = new NavigateBackBtn();

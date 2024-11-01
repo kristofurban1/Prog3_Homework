@@ -1,11 +1,18 @@
 package com.hq21tl_homework.recipe_book;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 public class RecipeBook {
     private final ArrayList<RecipeEntry> recipes;
+
+    public RecipeBook(File sourceFile){
+        //TODO: Import recipebook
+        this.recipes = new ArrayList<>();
+    }
 
     public RecipeBook(RecipeEntry[] recipes) {
         this.recipes = new ArrayList<>();
@@ -71,8 +78,22 @@ public class RecipeBook {
         return filtered.toArray(RecipeEntry[]::new);
     }
 
-    public RecipeEntry[] filterRecipesByAvailableIngredients(String filter){
-        //TODO
-        return new RecipeEntry[0];
+    public RecipeEntry[] filterRecipesByAvailableIngredients(List<String> filter){
+        ArrayList<RecipeEntry> match = new ArrayList<>(); 
+        for (RecipeEntry recipe : recipes) {
+            if (recipe.hasIngridients(filter)) match.add(recipe);
+        }
+        return match.toArray(RecipeEntry[]::new);
+    }
+
+    public String[] getIngredients(){
+        ArrayList<String> ingredients = new ArrayList<>();
+        for (RecipeEntry recipe : recipes) {
+            for (String ingredient : recipe.getIngredients()) {
+                if (!ingredients.contains(ingredient))
+                    ingredients.add(ingredient); 
+            }
+        }
+        return ingredients.toArray(String[]::new);
     }
 }

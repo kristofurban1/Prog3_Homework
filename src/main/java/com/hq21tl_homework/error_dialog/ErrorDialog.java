@@ -13,6 +13,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 
 import com.hq21tl_homework.error_dialog.DialogGUI.WindowPanel;
+import com.hq21tl_homework.error_dialog.ErrorDialog.DialogBehaviour;
+import com.hq21tl_homework.error_dialog.ErrorDialog.DialogType;
 
 public class ErrorDialog extends JDialog {
 
@@ -117,6 +119,20 @@ public class ErrorDialog extends JDialog {
     }
 
     public ErrorDialog(ErrorDialogSettings settings) {
+        this.settings = settings;
+        this.hasStackTrace = (settings.stackTrace != null);
+        guiBuiler();
+    }
+
+    public ErrorDialog(ErrorLevel level, String title, String message){
+        ErrorDialogSettings settings =  new ErrorDialogSettings(
+            title, 
+            level, 
+            DialogType.OK, 
+            DialogBehaviour.BLOCKING_DIALOG, 
+            message, 
+            null
+            );
         this.settings = settings;
         this.hasStackTrace = (settings.stackTrace != null);
         guiBuiler();

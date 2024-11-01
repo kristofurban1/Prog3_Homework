@@ -10,7 +10,7 @@ import javax.swing.JComponent;
 import javax.swing.JTextField;
 
 import com.hq21tl_homework.Locales;
-import com.hq21tl_homework.file_dialog.Panels.BottomPanel;
+import com.hq21tl_homework.file_dialog.FileDialogPanels.BottomPanel;
 
 public class BottomPanelObjects {
     private BottomPanelObjects() {}
