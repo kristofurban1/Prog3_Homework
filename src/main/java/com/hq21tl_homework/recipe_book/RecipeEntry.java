@@ -1,9 +1,30 @@
 package com.hq21tl_homework.recipe_book;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class RecipeEntry {
+    public static class RecipeEntryBuilder {
+        public String name = "";
+        public String category = "";
+        public String description = "";
+        public final List<Recipe> recipes;
+
+        public RecipeEntryBuilder(){
+            recipes = new ArrayList<>();
+        }
+        public RecipeEntryBuilder(RecipeEntry baseEntry){
+            name = baseEntry.getName();
+            category = baseEntry.getCategory();
+            description = baseEntry.getDescription();
+            recipes = Arrays.asList(baseEntry.getRecipes());
+        }
+
+        public RecipeEntry build(){
+            return new RecipeEntry(name, category, description, recipes.toArray(Recipe[]::new));
+        }
+    }
     private final String name;
     private final String category;
     private final String description;
@@ -11,7 +32,7 @@ public class RecipeEntry {
     private final Recipe[] recipes;
     
     public RecipeEntry(String name, String category, String description, Recipe[] recipes){
-        this.name = name ;
+        this.name = name;
         this.category = category;
         this.description = description;
         this.recipes = recipes;

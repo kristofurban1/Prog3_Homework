@@ -21,6 +21,7 @@ import com.hq21tl_homework.gui.SearchBarComponents.RadioSearchCategory;
 import com.hq21tl_homework.gui.SearchBarComponents.RadioSearchName;
 import com.hq21tl_homework.gui.SearchBarComponents.SearchBtn;
 import com.hq21tl_homework.gui.SearchBarComponents.SearchField;
+import com.hq21tl_homework.gui.recipe_editor.MenuItems;
 import com.hq21tl_homework.guiInitializable;
 
 public class Panel {
@@ -36,7 +37,7 @@ public class Panel {
         private final JMenuItem menuExit = new JMenuItem();
         
         private final JMenuItem menuAddRecipeEntry = new JMenuItem();
-        private final JMenuItem menuIngridientCollection = new JMenuItem();
+        //private final JMenuItem menuIngridientCollection = new JMenuItem();
 
         @Override
         public void initialize(JComponent parent, RecipeBookGUI root) {
@@ -48,10 +49,12 @@ public class Panel {
             fileMenu.add(menuExit);
 
             recipeMenu.add(menuAddRecipeEntry);
-            recipeMenu.add(menuIngridientCollection);
+            //recipeMenu.add(menuIngridientCollection);
 
             add(fileMenu);
             add(recipeMenu);
+
+            menuAddRecipeEntry.addActionListener(new MenuItems.AddRecipe());
 
             GridBagConstraints constraints = new GridBagConstraints();
             constraints.fill = GridBagConstraints.BOTH;
@@ -75,7 +78,7 @@ public class Panel {
             recipeMenu.setText(Locales.getString("Menu_Recipe"));
             
             menuAddRecipeEntry.setText(Locales.getString("Menu_Recipe_AddRecipeEntry"));
-            menuIngridientCollection.setText(Locales.getString("Menu_Recipe_IngridientCollection"));
+            //menuIngridientCollection.setText(Locales.getString("Menu_Recipe_IngridientCollection"));
 
         }
     }

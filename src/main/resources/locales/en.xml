@@ -12,7 +12,7 @@
 
     <string ID="Menu_Recipe">Recipe</string>
     <string ID="Menu_Recipe_AddRecipeEntry">Add Recipe Entry</string>
-    <string ID="Menu_Recipe_IngridientCollection">Ingridient Collection</string>
+    <!-- <string ID="Menu_Recipe_IngridientCollection">Ingridient Collection</string> -->
     
     <string ID="Searchbar_SearchLabel">Search:</string>
     <string ID="Searchbar_RadioLabel">Select search type:</string>
@@ -31,7 +31,12 @@
     <string ID="IngredientSelector_SearchBtn">Search</string>
     <string ID="IngredientSelector_OkBtn">Ok</string>
     <string ID="IngredientSelector_ToggleBtn">Toggle selection</string>
-
+    
+    <string ID="RecipeEditor_Title">Recipe Editor</string>
+    
+    <string ID="RecipeEditor_NameHint">Name...</string>
+    <string ID="RecipeEditor_CategoryHint">Category...</string>
+    <string ID="RecipeEditor_DescriptionHint">Description...</string>
     <!-- 
         <string ID="FileDialog_WindowName">File Dialog</string> 
         <string ID="FileDialog_Navigate">Goasd</string> 
