@@ -17,10 +17,9 @@ import com.hq21tl_homework.Locales;
 import com.hq21tl_homework.Locales.LocalizationChangeListener;
 import com.hq21tl_homework.gui.SearchBarComponents.ClearBtn;
 import com.hq21tl_homework.gui.SearchBarComponents.IngridientSearchBtn;
-import com.hq21tl_homework.gui.SearchBarComponents.RadioSearchCategory;
-import com.hq21tl_homework.gui.SearchBarComponents.RadioSearchName;
 import com.hq21tl_homework.gui.SearchBarComponents.SearchBtn;
 import com.hq21tl_homework.gui.SearchBarComponents.SearchField;
+import com.hq21tl_homework.gui.SearchBarComponents.SortAndSearchTypePanel;
 import com.hq21tl_homework.gui.recipe_editor.MenuItems;
 import com.hq21tl_homework.guiInitializable;
 
@@ -85,8 +84,7 @@ public class Panel {
 
     public static class SearchBar extends JPanel implements guiInitializable<RecipeBookGUI>{
         private final SearchField searchField = new SearchField();
-        private final RadioSearchName radioSearchName = new RadioSearchName();
-        private final RadioSearchCategory radioSearchCategory = new RadioSearchCategory();
+        private final SortAndSearchTypePanel sastPanel = new SortAndSearchTypePanel();
         private final SearchBtn searchBtn = new SearchBtn();
         private final ClearBtn clearBtn = new ClearBtn();
         private final IngridientSearchBtn ingridientSearch = new IngridientSearchBtn();
@@ -95,8 +93,7 @@ public class Panel {
             setLayout(new GridBagLayout());
 
             searchField.initialize(this, root);
-            radioSearchName.initialize(this, root);
-            radioSearchCategory.initialize(this, root);
+            sastPanel.initialize(this, root);
             searchBtn.initialize(this, root);
             clearBtn.initialize(this, root);
             ingridientSearch.initialize(this, root);

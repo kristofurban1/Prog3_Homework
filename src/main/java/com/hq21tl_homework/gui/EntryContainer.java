@@ -18,6 +18,9 @@ import javax.swing.SwingConstants;
 
 import com.hq21tl_homework.Locales;
 import com.hq21tl_homework.Locales.LocalizationChangeListener;
+import com.hq21tl_homework.error_dialog.ErrorDialog;
+import com.hq21tl_homework.error_dialog.ErrorDialog.ErrorLevel;
+import com.hq21tl_homework.gui.recipe_editor.RecipeEditor;
 import com.hq21tl_homework.guiInitializable;
 import com.hq21tl_homework.recipe_book.RecipeEntry;
 
@@ -25,6 +28,7 @@ public class EntryContainer extends JPanel implements guiInitializable<RecipeBoo
 
     public static class Entry extends JPanel implements guiInitializable<RecipeBookGUI>, LocalizationChangeListener{
 
+        
         private transient RecipeEntry recipeEntry;
 
         private final JLabel nameLabel = new JLabel();
@@ -71,6 +75,26 @@ public class EntryContainer extends JPanel implements guiInitializable<RecipeBoo
             parent.add(this);
             Locales.eventHandler.addValueChangeListener(this);
 
+            viewButton.addActionListener(l -> {
+                //TODO: new EntryViewer(recipeEntry).showGUI();
+            });
+
+            editButton.addActionListener(l -> {
+                RecipeEditor editor = new RecipeEditor(recipeEntry);
+                RecipeEntry newEntry = editor.showGUI();
+                if (newEntry == null) // Cancelled
+                    return;
+                if(recipeEntry.getName().equals(newEntry.getName()))
+                    StateContainer.EntryCollectionState.getRecipeBookInsatnce().updateRecipe(newEntry);
+                else{
+                    if (!StateContainer.EntryCollectionState.getRecipeBookInsatnce().addRecipe(newEntry)){
+                       ErrorDialog dialog = new ErrorDialog(ErrorLevel.INFO, "Entry already exists.", "Entry with name " + newEntry.getName() + " alreay exists.");
+                       dialog.showError();
+                       return;
+                    }
+                    StateContainer.EntryCollectionState.getRecipeBookInsatnce().removeRecipe(recipeEntry.getName());
+                }
+            });
             localizationChanged();
         }
 

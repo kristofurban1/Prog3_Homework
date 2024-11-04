@@ -15,7 +15,10 @@
     <!-- <string ID="Menu_Recipe_IngridientCollection">Ingridient Collection</string> -->
     
     <string ID="Searchbar_SearchLabel">Search:</string>
-    <string ID="Searchbar_RadioLabel">Select search type:</string>
+    <string ID="Searchbar_SortCombo_Name"    >Name    </string>
+    <string ID="Searchbar_SortCombo_Category">Category</string>
+    <string ID="Searchbar_OrderCombo_Ascending" >Ascending </string>
+    <string ID="Searchbar_OrderCombo_Descending">Descending</string>
     <string ID="Searchbar_RadioName">Name</string>
     <string ID="Searchbar_RadioCategory">Category</string>
     <string ID="Searchbar_Search">Search</string>
@@ -23,7 +26,7 @@
     <string ID="Searchbar_IngredientSearch">Ingredient Search</string>
     
     <string ID="StatusPanel_EntryCount">Number of entries: </string>
-    
+
     <string ID="EntryContainer_Entry_View">View</string>
     <string ID="EntryContainer_Entry_Edit">Edit</string>
 

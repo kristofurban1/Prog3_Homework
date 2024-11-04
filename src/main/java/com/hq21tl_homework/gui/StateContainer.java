@@ -1,15 +1,20 @@
 package com.hq21tl_homework.gui;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
+import com.hq21tl_homework.HintTextField;
 import com.hq21tl_homework.error_dialog.ErrorDialog;
 import com.hq21tl_homework.error_dialog.ErrorDialog.ErrorLevel;
+import com.hq21tl_homework.gui.SearchBarComponents.OrderComboBox;
 import com.hq21tl_homework.gui.SearchBarComponents.RadioSearchCategory;
 import com.hq21tl_homework.gui.SearchBarComponents.RadioSearchName;
+import com.hq21tl_homework.gui.SearchBarComponents.SortComboBox;
 import com.hq21tl_homework.recipe_book.RecipeBook;
 import com.hq21tl_homework.recipe_book.RecipeEntry;
 
@@ -80,7 +85,9 @@ public class StateContainer {
         private static RecipeBook recipeBookInstance = null;
         private static EntryContainer entryContainerInstance = null;
         private static JLabel entryCountInstance = new JLabel();
-        private static JTextField searchTerm = null;
+        private static HintTextField<JTextField> searchTerm = null;
+        private static SortComboBox sortCombo = null;
+        private static OrderComboBox orderCombo = null;
         private static int searchType = 0; // Name, Category, Ingridient
 
         public static final RadioButtonState radioButtonState = new RadioButtonState(); 
@@ -93,8 +100,12 @@ public class StateContainer {
                 entryContainerInstance = ins;
             }else if (instance instanceof JLabel ins) {
                 entryCountInstance = ins;
-            }else if (instance instanceof JTextField ins) {
+            }else if (instance instanceof HintTextField ins) { //NOSONAR // Illegal in Java
                 searchTerm = ins;
+            }else if (instance instanceof SortComboBox ins) {
+                sortCombo = ins;
+            }else if (instance instanceof OrderComboBox ins) {
+                orderCombo = ins;
             }
             else {
                 new ErrorDialog(
@@ -107,6 +118,8 @@ public class StateContainer {
             if (recipeBookInstance != null &&
                 entryContainerInstance != null && 
                 entryCountInstance != null &&
+                sortCombo != null &&
+                orderCombo != null &&
                 searchTerm != null) 
                 performUpdate();
         }
@@ -115,6 +128,8 @@ public class StateContainer {
             if (recipeBookInstance == null ||
             entryContainerInstance == null || 
             entryCountInstance == null ||
+            sortCombo == null ||
+            orderCombo == null ||
             searchTerm == null
             ){
                 ErrorDialog.ErrorDialogSettings dialogSettings = new ErrorDialog.ErrorDialogSettings(
@@ -125,7 +140,9 @@ public class StateContainer {
                     "Error: StateContainer.EntryCollectionState used without proper initialization!" +
                         (recipeBookInstance == null ? "\nRecipeBookInstance was null!" : "") + 
                         (entryContainerInstance == null ? "\nEntryContainerInstance was null!" : "") +
-                        (entryContainerInstance == null ? "\nEntryCountInstance was null!" : "") +
+                        (entryCountInstance == null ? "\nEntryCountInstance was null!" : "") +
+                        (sortCombo == null ? "\nSortComboBoxInstance was null!" : "") +
+                        (orderCombo == null ? "\nOrderComboBoxInstance was null!" : "") +
                         (searchTerm == null ? "\nSearchTerm was null!" : ""), 
                     null
                     );
@@ -150,7 +167,7 @@ public class StateContainer {
             return recipeBookInstance;
         }
 
-        public static JTextField getSearchTerm(){
+        public static HintTextField<JTextField> getSearchTerm(){
             if (!instanceVerify()) return null;
             return searchTerm;
         }
@@ -171,9 +188,19 @@ public class StateContainer {
                 }
             }
 
+            List<RecipeEntry> orderedToDisplay = Arrays.asList(toDisplay);
+            if (sortCombo.getSelectedIndex() == 0)
+                Collections.sort(orderedToDisplay, (o1, o2) -> o1.getName().compareTo(o2.getName()));
+            else
+                Collections.sort(orderedToDisplay, (o1, o2) -> o1.getCategory().compareTo(o2.getCategory()));
+
+
+            if (orderCombo.getSelectedIndex() == 1)
+                Collections.reverse(orderedToDisplay);
+            
             entryContainerInstance.revalidate();
             
-            for (RecipeEntry recipeEntry : toDisplay) {
+            for (RecipeEntry recipeEntry : orderedToDisplay) {
                 EntryContainer.Entry entry = new EntryContainer.Entry();
                 entry.initialize(entryContainerInstance, null);
                 entry.setRecipeEntry(recipeEntry);

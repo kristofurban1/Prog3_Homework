@@ -9,6 +9,7 @@ import com.hq21tl_homework.recipe_book.RecipeBook;
 import com.hq21tl_homework.recipe_book.RecipeEntry;
 
 public class Main {
+
     /* 
      * 
      private static void createAndShowGUI() {
@@ -42,29 +43,44 @@ public class Main {
         //Display the window.
         frame.setVisible(true);
     }
-    */
- 
+     */
+
     public static void main(String[] args) {
         RecipeBook recipeBook = new RecipeBook(new File("null"));
         recipeBook.addRecipe(new RecipeEntry(
-            "Test",
-            "category",
-            "A good lil test",
-            new Recipe[] {
-                new Recipe(
-                    new Ingredient[]{
-                        new Ingredient("Ingridient1", 100, "g"),
-                        new Ingredient("Ingridient2", 200, "mg"),
-                        new Ingredient("Ingridient3", 300, "l"),
-                    }, 
-                    new String[]{
-                        "Step1"
-                    }
-                )
-            }
+                "Test",
+                "category",
+                "A good lil test",
+                new Recipe[]{
+                    new Recipe(
+                            new Ingredient[]{
+                                new Ingredient("Ingridient1", 100, "g"),
+                                new Ingredient("Ingridient2", 200, "mg"),
+                                new Ingredient("Ingridient3", 300, "l"),},
+                            new String[]{
+                                "Step1"
+                            }
+                    )
+                }
+        ));
+        recipeBook.addRecipe(new RecipeEntry(
+                "Soup",
+                "Liquid",
+                "Good Soup *Like*",
+                new Recipe[]{
+                    new Recipe(
+                            new Ingredient[]{
+                                new Ingredient("Soup base", 100, "g"),
+                                new Ingredient("Soupyfier", 200, "mg"),
+                                new Ingredient("Cat meat", 300, "l"),},
+                            new String[]{
+                                "Make soup",
+                                "Enjoy"
+                            }
+                    )
+                }
         ));
         /* 
-         * 
          recipeBook.addRecipe(new RecipeEntry("Test2", "null", "A shit ton o description", null));
          recipeBook.addRecipe(new RecipeEntry("Test3", "null", "A shit ton o description", null));
          recipeBook.addRecipe(new RecipeEntry("Test4", "null", "A shit ton o description", null));

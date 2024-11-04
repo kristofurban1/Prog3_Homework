@@ -38,8 +38,6 @@ public class HintTextField<T extends JTextComponent> implements FocusListener{
         }
         if (isShowing) base.setForeground(new Color(0,0,0,80));
         else base.setForeground(Color.BLACK);
-        System.out.println("Focus gained! Hint: " + hint + ", " + (isShowing ? "showing" : "hidden"));
-
     }
 
     @Override
@@ -52,7 +50,6 @@ public class HintTextField<T extends JTextComponent> implements FocusListener{
         }
         if (isShowing) base.setForeground(new Color(0,0,0,80));
         else base.setForeground(Color.BLACK);
-        System.out.println("Focus lost: " + (isShowing ? "showing" : "hidden"));
     }
 
     public String getText() {
