@@ -94,6 +94,7 @@ public class EntryContainer extends JPanel implements guiInitializable<RecipeBoo
                     }
                     StateContainer.EntryCollectionState.getRecipeBookInsatnce().removeRecipe(recipeEntry.getName());
                 }
+                StateContainer.EntryCollectionState.performUpdate();
             });
             localizationChanged();
         }

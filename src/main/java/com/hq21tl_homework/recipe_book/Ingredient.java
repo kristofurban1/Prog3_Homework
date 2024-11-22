@@ -1,6 +1,25 @@
 package com.hq21tl_homework.recipe_book;
 
 public class Ingredient {
+    public static class IngredientBuilder {
+        public String name = "";
+        public double amount = 0;
+        public String quantifyer = "";
+
+        public IngredientBuilder(){}
+        public IngredientBuilder(Ingredient baseEntry){
+            name = baseEntry.getName();
+            amount = baseEntry.getAmount();
+            quantifyer = baseEntry.getQuantifyer();
+        }
+
+        public Ingredient build(){
+            return new Ingredient(name, amount, quantifyer);
+        }
+        public boolean cleanup() {
+            return name.isBlank();
+        }
+    }
     private final String name;
     private final double amount;
     private final String quantifyer;
@@ -29,5 +48,11 @@ public class Ingredient {
             return name.equals(ingr.getName());
         else return false;
     }
+
+    @Override
+    public String toString() {
+        return name + ": " + amount + quantifyer;
+    }
+    
     
 }

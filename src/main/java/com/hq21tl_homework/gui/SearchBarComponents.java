@@ -1,6 +1,5 @@
 package com.hq21tl_homework.gui;
 
-import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
@@ -61,7 +60,7 @@ public class SearchBarComponents {
             orderComboBox.initialize(this, root);
             radioSearchName.initialize(this, root);
             radioSearchCategory.initialize(this, root);
-            setBackground(Color.green);
+            //setBackground(Color.green);
             GridBagConstraints constraints = new GridBagConstraints();
             constraints.fill = GridBagConstraints.BOTH;
             constraints.gridx = 0;

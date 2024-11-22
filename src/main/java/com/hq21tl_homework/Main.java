@@ -76,8 +76,28 @@ public class Main {
                             new String[]{
                                 "Make soup",
                                 "Enjoy"
-                            }
-                    )
+                        }
+                    ),
+                    new Recipe(
+                            new Ingredient[]{
+                                new Ingredient("Soup base2", 100, "g"),
+                                new Ingredient("Soupyfier2", 200, "mg"),
+                                new Ingredient("Cat meat2", 300, "l"),},
+                            new String[]{
+                                "Make soup",
+                                "Enjoy"
+                        }
+                    ),
+                    new Recipe(
+                        new Ingredient[]{
+                            new Ingredient("Soup base3", 100, "g"),
+                            new Ingredient("Soupyfier3", 200, "mg"),
+                            new Ingredient("Cat meat3", 300, "l"),},
+                        new String[]{
+                            "Make soup",
+                            "Enjoy"
+                    }
+                )
                 }
         ));
         /* 

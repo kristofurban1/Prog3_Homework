@@ -1,4 +1,4 @@
-package com.hq21tl_homework.gui.recipe_editor;
+package com.hq21tl_homework.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,7 +8,7 @@ import com.hq21tl_homework.error_dialog.ErrorDialog.DialogBehaviour;
 import com.hq21tl_homework.error_dialog.ErrorDialog.DialogResult;
 import com.hq21tl_homework.error_dialog.ErrorDialog.DialogType;
 import com.hq21tl_homework.error_dialog.ErrorDialog.ErrorLevel;
-import com.hq21tl_homework.gui.StateContainer;
+import com.hq21tl_homework.gui.recipe_editor.RecipeEditor;
 import com.hq21tl_homework.recipe_book.RecipeEntry;
 
 public class MenuItems {
@@ -22,8 +22,10 @@ public class MenuItems {
         public void actionPerformed(ActionEvent e) {
             RecipeEditor editor = new RecipeEditor(null);
             RecipeEntry entry = editor.showGUI();
+            if (entry == null) return; // cancelled
             boolean success = StateContainer.EntryCollectionState.getRecipeBookInsatnce().addRecipe(entry);
             if (success) {
+                StateContainer.EntryCollectionState.performUpdate();
                 return;
             }
 
@@ -44,6 +46,8 @@ public class MenuItems {
                         .getRecipeBookInsatnce()
                         .updateRecipe(entry);
             }
+            
+            StateContainer.EntryCollectionState.performUpdate();
 
         }
     }

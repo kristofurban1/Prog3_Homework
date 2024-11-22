@@ -94,6 +94,18 @@ public class RecipeBook {
                     ingredients.add(ingredient); 
             }
         }
+        Collections.sort(ingredients, Comparable::compareTo);
         return ingredients.toArray(String[]::new);
+    }
+    public String[] getQuantifyers(){
+        ArrayList<String> quantifyers = new ArrayList<>();
+        for (RecipeEntry recipe : recipes) {
+            for (String quantifyer : recipe.getQuantifyers()) {
+                if (!quantifyers.contains(quantifyer))
+                    quantifyers.add(quantifyer); 
+            }
+        }
+        Collections.sort(quantifyers, Comparable::compareTo);
+        return quantifyers.toArray(String[]::new);
     }
 }

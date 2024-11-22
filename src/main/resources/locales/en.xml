@@ -40,6 +40,13 @@
     <string ID="RecipeEditor_NameHint">Name...</string>
     <string ID="RecipeEditor_CategoryHint">Category...</string>
     <string ID="RecipeEditor_DescriptionHint">Description...</string>
+    <string ID="RecipeEditor_OkBtn">OK</string>
+    <string ID="RecipeEditor_CancelBtn">Cancel</string>
+    <string ID="RecipeEditor_TabName">Recipe </string>
+    <string ID="RecipeEditor_AddRecipe">Add Recipe </string>
+    <string ID="RecipeEditor_Ingredients">Ingredients</string>
+    <string ID="RecipeEditor_Instructions">Instructions</string>
+    <string ID="RecipeEditor_DeleteRecipe">Delete Recipe</string>
     <!-- 
         <string ID="FileDialog_WindowName">File Dialog</string> 
         <string ID="FileDialog_Navigate">Goasd</string> 

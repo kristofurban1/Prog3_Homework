@@ -1,15 +1,16 @@
 package com.hq21tl_homework.recipe_book;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+
+import com.hq21tl_homework.recipe_book.Recipe.RecipeBuilder;
 
 public class RecipeEntry {
     public static class RecipeEntryBuilder {
         public String name = "";
         public String category = "";
         public String description = "";
-        public final List<Recipe> recipes;
+        public final List<RecipeBuilder> recipes;
 
         public RecipeEntryBuilder(){
             recipes = new ArrayList<>();
@@ -18,11 +19,21 @@ public class RecipeEntry {
             name = baseEntry.getName();
             category = baseEntry.getCategory();
             description = baseEntry.getDescription();
-            recipes = Arrays.asList(baseEntry.getRecipes());
+            recipes = new ArrayList<>();
+            for (Recipe r : baseEntry.getRecipes()) {
+                recipes.add(new RecipeBuilder(r));
+            }
         }
 
         public RecipeEntry build(){
-            return new RecipeEntry(name, category, description, recipes.toArray(Recipe[]::new));
+            List<Recipe> builtRecipe = new ArrayList<>();
+            for (RecipeBuilder recipe : recipes) {
+                builtRecipe.add(recipe.build());
+            }
+            return new RecipeEntry(name, category, description, builtRecipe.toArray(Recipe[]::new));
+        }
+        public void cleanup() {
+            recipes.removeIf(r -> r.cleanup());
         }
     }
     private final String name;
@@ -69,5 +80,15 @@ public class RecipeEntry {
             }
         }
         return ingredients.toArray(String[]::new);
+    }
+    public String[] getQuantifyers(){
+        ArrayList<String> quantifyers = new ArrayList<>();
+        for (Recipe recipe : recipes) {
+            for (String quantifier : recipe.getQuantifyers()) {
+                if (!quantifyers.contains(quantifier))
+                    quantifyers.add(quantifier);
+            }
+        }
+        return quantifyers.toArray(String[]::new);
     }
 }

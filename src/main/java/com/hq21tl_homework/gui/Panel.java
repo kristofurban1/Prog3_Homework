@@ -20,7 +20,6 @@ import com.hq21tl_homework.gui.SearchBarComponents.IngridientSearchBtn;
 import com.hq21tl_homework.gui.SearchBarComponents.SearchBtn;
 import com.hq21tl_homework.gui.SearchBarComponents.SearchField;
 import com.hq21tl_homework.gui.SearchBarComponents.SortAndSearchTypePanel;
-import com.hq21tl_homework.gui.recipe_editor.MenuItems;
 import com.hq21tl_homework.guiInitializable;
 
 public class Panel {
