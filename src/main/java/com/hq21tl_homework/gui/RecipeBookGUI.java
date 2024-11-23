@@ -12,6 +12,7 @@ public class RecipeBookGUI extends JFrame{
     Panel.WindowPanel windowPanel = new Panel.WindowPanel();
 
     private void buildGUI(){
+        StateContainer.EntryCollectionState.setInstance(this);
         setSize(800, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setMinimumSize(new Dimension(650, 500));

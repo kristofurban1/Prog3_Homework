@@ -108,7 +108,7 @@ public class Locales {
     private String selectedLocale;
     private HashMap<String, String> localeStringsMap = new HashMap<>();
 
-    public Utils.KeyValuePair<String, String> getSelectedLocale() {
+    public Utils.KeyValuePair<String, String> getInstanceSelectedLocale() {
         for (KeyValuePair<String, String> locale : availableLocales) {
             if (selectedLocale.equals(locale.getKey())) {
                 return locale;
@@ -319,6 +319,14 @@ public class Locales {
         }
     }
 
+    public static String getSelectedLocale() {
+        return instance.getInstanceSelectedLocale().getKey();
+    }
+
+    public static Utils.KeyValuePair<String, String>[] getAvailableLocales(){
+        return instance.availableLocales;
+    }
+
     /**
      * Switching localizaation langugage. Fires LocalizationChanged Event
      *
@@ -335,7 +343,7 @@ public class Locales {
                     "Locales: Missing string",
                     ErrorLevel.WARNING,
                     DialogType.OK, DialogBehaviour.NON_BLOCKING_DIALOG,
-                    String.format("Missing string {%s} in locale %s(%s)", key, instance.getSelectedLocale().getKey(), instance.getSelectedLocale().getValue()),
+                    String.format("Missing string {%s} in locale %s(%s)", key, instance.getInstanceSelectedLocale().getKey(), instance.getInstanceSelectedLocale().getValue()),
                     null);
             ErrorDialog errDialog = new ErrorDialog(settings);
             errDialog.showError();

@@ -1,8 +1,6 @@
 package com.hq21tl_homework.gui.recipe_editor;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -22,6 +20,12 @@ import javax.swing.JTextField;
 
 import com.hq21tl_homework.HintTextField;
 import com.hq21tl_homework.Locales;
+import com.hq21tl_homework.error_dialog.ErrorDialog;
+import com.hq21tl_homework.error_dialog.ErrorDialog.DialogBehaviour;
+import com.hq21tl_homework.error_dialog.ErrorDialog.DialogResult;
+import com.hq21tl_homework.error_dialog.ErrorDialog.DialogType;
+import com.hq21tl_homework.error_dialog.ErrorDialog.ErrorLevel;
+import com.hq21tl_homework.gui.StateContainer;
 import com.hq21tl_homework.guiInitializable;
 import com.hq21tl_homework.recipe_book.Recipe;
 import com.hq21tl_homework.recipe_book.Recipe.RecipeBuilder;
@@ -29,13 +33,12 @@ public class Panels {
     private Panels() {}
 
     public static class TopPanel extends JPanel implements guiInitializable<RecipeEditor>, Locales.LocalizationChangeListener{
-        HintTextField<JTextField> nameField = new HintTextField<>(Locales.getString("RecipeEditor_NameHint"), new JTextField());
-        HintTextField<JTextField> categoryField = new HintTextField<>(Locales.getString("RecipeEditor_CategoryHint"), new JTextField());
-        HintTextField<JTextArea> descriptionField = new HintTextField<>(Locales.getString("RecipeEditor_DescriptionHint"), new JTextArea());
+        private final transient HintTextField<JTextField> nameField = new HintTextField<>(Locales.getString("RecipeEditor_NameHint"), new JTextField());
+        private final transient HintTextField<JTextField> categoryField = new HintTextField<>(Locales.getString("RecipeEditor_CategoryHint"), new JTextField());
+        private final transient HintTextField<JTextArea> descriptionField = new HintTextField<>(Locales.getString("RecipeEditor_DescriptionHint"), new JTextArea());
         @Override
         public void initialize(JComponent parent, RecipeEditor root) {
             setLayout(new GridBagLayout());
-            //setBackground(Color.BLUE);
             nameField.initialize();
             categoryField.initialize();
             descriptionField.initialize();
@@ -165,6 +168,7 @@ public class Panels {
     public static class BottomPanel extends JPanel implements guiInitializable<RecipeEditor>, Locales.LocalizationChangeListener{
         private final JButton okBtn = new JButton();
         private final JButton cancelBtn = new JButton();
+        private final JButton deleteBtn = new JButton();
 
         @Override
         public void initialize(JComponent parent, RecipeEditor root) {
@@ -172,6 +176,7 @@ public class Panels {
             localizationChanged();
             add(okBtn);
             add(cancelBtn);
+            if (root.entry != null) add(deleteBtn);
 
             GridBagConstraints constraints = new GridBagConstraints();
             constraints.gridx = 0;
@@ -192,12 +197,29 @@ public class Panels {
             cancelBtn.addActionListener(l ->
                 root.dispose()
             );
+            deleteBtn.addActionListener(l -> {
+                ErrorDialog dialog = new ErrorDialog(new ErrorDialog.ErrorDialogSettings(
+                    Locales.getString("RecipeEditor_DeleteBtn_Title"), 
+                    ErrorLevel.INFO, 
+                    DialogType.YES_NO, 
+                    DialogBehaviour.BLOCKING_DIALOG, 
+                    Locales.getString("RecipeEditor_DeleteBtn_Message"), 
+                    null));
+                ErrorDialog.DialogResult result = dialog.showError();
+                if (result == DialogResult.YES){
+                    StateContainer.EntryCollectionState
+                        .getRecipeBookInsatnce()
+                        .removeRecipe(root.entry.getName());
+                    root.dispose();
+                }
+            });
         }
 
         @Override
         public void localizationChanged() {
             okBtn.setText(Locales.getString("RecipeEditor_OkBtn"));
             cancelBtn.setText(Locales.getString("RecipeEditor_CancelBtn"));
+            deleteBtn.setText(Locales.getString("RecipeEditor_DeleteBtn"));
         }
 
     }

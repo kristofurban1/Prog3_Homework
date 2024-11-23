@@ -13,6 +13,7 @@ import com.hq21tl_homework.recipe_book.RecipeEntry;
 
 public class RecipeEditor extends JDialog {
     private final Panels.WindowPanel windowPanel = new WindowPanel();
+    public final transient RecipeEntry entry;
     public final transient RecipeEntry.RecipeEntryBuilder entryBuilder;
     public boolean cancelled = true;
     private void buildGUI(){
@@ -27,6 +28,7 @@ public class RecipeEditor extends JDialog {
         windowPanel.initialize(null, this);
     }
     public RecipeEditor(RecipeEntry recipeEntry){
+        entry = recipeEntry;
         if (recipeEntry == null)
             this.entryBuilder = new RecipeEntry.RecipeEntryBuilder();
         else 

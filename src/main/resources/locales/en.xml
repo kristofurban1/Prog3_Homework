@@ -12,8 +12,7 @@
 
     <string ID="Menu_Recipe">Recipe</string>
     <string ID="Menu_Recipe_AddRecipeEntry">Add Recipe Entry</string>
-    <!-- <string ID="Menu_Recipe_IngridientCollection">Ingridient Collection</string> -->
-    
+
     <string ID="Searchbar_SearchLabel">Search:</string>
     <string ID="Searchbar_SortCombo_Name"    >Name    </string>
     <string ID="Searchbar_SortCombo_Category">Category</string>
@@ -42,11 +41,22 @@
     <string ID="RecipeEditor_DescriptionHint">Description...</string>
     <string ID="RecipeEditor_OkBtn">OK</string>
     <string ID="RecipeEditor_CancelBtn">Cancel</string>
+    <string ID="RecipeEditor_DeleteBtn">Delete Recipe</string>
+    <string ID="RecipeEditor_DeleteBtn_Title">Confirmation</string>
+    <string ID="RecipeEditor_DeleteBtn_Message">Are you sure you want to delete this recipe?</string>
+    
     <string ID="RecipeEditor_TabName">Recipe </string>
     <string ID="RecipeEditor_AddRecipe">Add Recipe </string>
     <string ID="RecipeEditor_Ingredients">Ingredients</string>
     <string ID="RecipeEditor_Instructions">Instructions</string>
     <string ID="RecipeEditor_DeleteRecipe">Delete Recipe</string>
+
+
+    <string ID="LangSelector_Title">Language Selector</string>
+    <string ID="LangSelector_Label">Language: </string>
+    <string ID="LangSelector_Ok">Ok</string>
+    <string ID="LangSelector_Cancel">Cancel</string>
+
     <!-- 
         <string ID="FileDialog_WindowName">File Dialog</string> 
         <string ID="FileDialog_Navigate">Goasd</string> 

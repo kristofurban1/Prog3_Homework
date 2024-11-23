@@ -82,8 +82,10 @@ public class EntryContainer extends JPanel implements guiInitializable<RecipeBoo
             editButton.addActionListener(l -> {
                 RecipeEditor editor = new RecipeEditor(recipeEntry);
                 RecipeEntry newEntry = editor.showGUI();
-                if (newEntry == null) // Cancelled
+                if (newEntry == null){ // Cancelled / Deleted
+                    StateContainer.EntryCollectionState.performUpdate(); // In case of deletion
                     return;
+                }
                 if(recipeEntry.getName().equals(newEntry.getName()))
                     StateContainer.EntryCollectionState.getRecipeBookInsatnce().updateRecipe(newEntry);
                 else{

@@ -82,6 +82,7 @@ public class StateContainer {
     }
     public static class EntryCollectionState{
         private EntryCollectionState() {}
+        private static RecipeBookGUI recipeBookGUIInstance = null;
         private static RecipeBook recipeBookInstance = null;
         private static EntryContainer entryContainerInstance = null;
         private static JLabel entryCountInstance = new JLabel();
@@ -96,6 +97,8 @@ public class StateContainer {
         public static void setInstance(Object instance){
             if (instance instanceof RecipeBook ins) {
                 recipeBookInstance = ins; 
+            }else if (instance instanceof RecipeBookGUI ins) {
+                recipeBookGUIInstance = ins; 
             }else if (instance instanceof EntryContainer ins) {
                 entryContainerInstance = ins;
             }else if (instance instanceof JLabel ins) {
@@ -116,6 +119,7 @@ public class StateContainer {
             }
 
             if (recipeBookInstance != null &&
+                recipeBookGUIInstance != null && 
                 entryContainerInstance != null && 
                 entryCountInstance != null &&
                 sortCombo != null &&
@@ -126,6 +130,7 @@ public class StateContainer {
 
         private static boolean instanceVerify(){
             if (recipeBookInstance == null ||
+            recipeBookGUIInstance == null || 
             entryContainerInstance == null || 
             entryCountInstance == null ||
             sortCombo == null ||
@@ -139,6 +144,7 @@ public class StateContainer {
                     ErrorDialog.DialogBehaviour.BLOCKING_DIALOG,
                     "Error: StateContainer.EntryCollectionState used without proper initialization!" +
                         (recipeBookInstance == null ? "\nRecipeBookInstance was null!" : "") + 
+                        (recipeBookGUIInstance == null ? "\nRecipeBookGUIInstance was null!" : "") + 
                         (entryContainerInstance == null ? "\nEntryContainerInstance was null!" : "") +
                         (entryCountInstance == null ? "\nEntryCountInstance was null!" : "") +
                         (sortCombo == null ? "\nSortComboBoxInstance was null!" : "") +
@@ -154,11 +160,17 @@ public class StateContainer {
             return true;
         }
 
+        public static RecipeBookGUI getRecipeBookGUI(){
+            if (!instanceVerify()) return null;
+            return recipeBookGUIInstance;
+        }
+
         public static void setSearchType(int type){
             searchType = type;
         }
 
         public static void setIngredientFilter(String[] filter){
+            if (!instanceVerify()) return;
             ingridientFilter = filter;
         }
 

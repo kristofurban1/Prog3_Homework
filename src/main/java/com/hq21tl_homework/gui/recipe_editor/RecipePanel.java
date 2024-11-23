@@ -4,8 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
@@ -17,10 +15,8 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -85,7 +81,8 @@ public class RecipePanel extends JPanel implements guiInitializable<RecipeEditor
             ((RecipeEditorPanel)(parent.getParent())).update(-1);
         });
 
-        update();
+        updateIngridientsPanel();
+        updateInstructionPanel();
         Locales.eventHandler.addValueChangeListener(this);
         localizationChanged();
         revalidate();
@@ -99,7 +96,17 @@ public class RecipePanel extends JPanel implements guiInitializable<RecipeEditor
         quantityChange.setRecipe(recipe);
     }
 
-    public void update(){
+    public void updateInstructionPanel(){
+        instructionPanel.removeAll();
+        ingredientPanel.setLayout(new BoxLayout(ingredientPanel, BoxLayout.Y_AXIS));
+        
+        for (String instruction : recipe.instructions) {
+            JPanel entryPanel = new JPanel();
+
+        }
+        
+    }
+    public void updateIngridientsPanel(){
         
         ingredientPanel.removeAll();
         ingredientPanel.setLayout(new BoxLayout(ingredientPanel, BoxLayout.Y_AXIS));
@@ -142,7 +149,7 @@ public class RecipePanel extends JPanel implements guiInitializable<RecipeEditor
             delete.setName(""+recipe.ingredients.indexOf(ingredient));
             delete.addActionListener(l->{
                 recipe.ingredients.remove(Integer.parseInt(delete.getName()));
-                update();                              
+                updateIngridientsPanel();                              
             });
 
             ingredientPanel.add(entry);
@@ -157,8 +164,12 @@ public class RecipePanel extends JPanel implements guiInitializable<RecipeEditor
         ingredientPanel.add(btnPanel);
         addBtn.addActionListener(l-> {
             recipe.ingredients.add(new IngredientBuilder());
-            update();
+            updateIngridientsPanel();
         });
+
+
+        
+
         revalidate();
         repaint();
     }

@@ -9,6 +9,7 @@ import javax.swing.event.DocumentListener;
 import com.hq21tl_homework.HintTextField;
 
 public class EditorEvents {
+    private EditorEvents() {}
     public static class NameChanged implements DocumentListener{
         private final HintTextField<JTextField> base;
         private final RecipeEditor editor;
@@ -46,14 +47,11 @@ public class EditorEvents {
         @Override
         public void insertUpdate(DocumentEvent e) {
             editor.entryBuilder.category = base.getText();
-            System.out.println("update: " + base.getText() + (base.isShowingHint() ? "(hint)" : ""));
-
         }
         
         @Override
         public void removeUpdate(DocumentEvent e) {
             editor.entryBuilder.category = base.getText();
-            System.out.println("update: " + base.getText());
         }
         
         @Override

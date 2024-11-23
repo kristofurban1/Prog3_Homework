@@ -35,8 +35,6 @@ public class Panel {
         private final JMenuItem menuExit = new JMenuItem();
         
         private final JMenuItem menuAddRecipeEntry = new JMenuItem();
-        //private final JMenuItem menuIngridientCollection = new JMenuItem();
-
         @Override
         public void initialize(JComponent parent, RecipeBookGUI root) {
             
@@ -47,10 +45,14 @@ public class Panel {
             fileMenu.add(menuExit);
 
             recipeMenu.add(menuAddRecipeEntry);
-            //recipeMenu.add(menuIngridientCollection);
 
             add(fileMenu);
             add(recipeMenu);
+
+            menuImport.addActionListener(new MenuItems.Import());
+            menuExport.addActionListener(new MenuItems.Export());
+            menuPreferences.addActionListener(new MenuItems.SetLanguage());
+            menuExit.addActionListener(new MenuItems.Exit());
 
             menuAddRecipeEntry.addActionListener(new MenuItems.AddRecipe());
 
