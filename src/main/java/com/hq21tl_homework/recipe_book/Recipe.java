@@ -22,7 +22,8 @@ public class Recipe {
             for (Ingredient i : baseEntry.getIngredients()) {
                 ingredients.add(new IngredientBuilder(i));
             }
-            instructions = Arrays.asList(baseEntry.getInstructions());
+            instructions = new ArrayList<>();
+            instructions.addAll(Arrays.asList(baseEntry.getInstructions()));
         }
 
         public Recipe build(){

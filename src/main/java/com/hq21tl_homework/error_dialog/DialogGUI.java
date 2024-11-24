@@ -27,6 +27,7 @@ import com.hq21tl_homework.Locales;
 import com.hq21tl_homework.error_dialog.ErrorDialog.DialogResult;
 
 public class DialogGUI {
+    private static final String FONT_STRING = "Label.font";
 
     private DialogGUI() {
     }
@@ -34,6 +35,7 @@ public class DialogGUI {
     public static class MessagePanel extends JPanel {
 
         public void initialize(JComponent parent, ErrorDialog root) {
+            removeAll();
             GridBagConstraints constraints = new GridBagConstraints();
             constraints.fill = GridBagConstraints.BOTH;
             constraints.insets = new Insets(5, 10, 10, 10);
@@ -64,7 +66,7 @@ public class DialogGUI {
             JTextArea textArea = new JTextArea();
             textArea.setWrapStyleWord(true);
             textArea.setLineWrap(true);
-            textArea.setFont(UIManager.getFont("Label.font"));
+            textArea.setFont(UIManager.getFont(FONT_STRING));
             textArea.setBorder(UIManager.getBorder("Label.border"));
             textArea.setOpaque(false);
             textArea.setEditable(false);
@@ -93,6 +95,7 @@ public class DialogGUI {
     public static class StackTracePanel extends JPanel {
 
         public void initialize(JComponent parent, ErrorDialog root) {
+            removeAll();
             GridBagConstraints constraints = new GridBagConstraints();
             constraints.fill = GridBagConstraints.BOTH;
             constraints.insets = new Insets(0, 10, 10, 10);
@@ -107,17 +110,17 @@ public class DialogGUI {
             JLabel stackTraceTitle = new JLabel("--StackTrace--");
             stackTraceTitle.setAlignmentX(SwingConstants.CENTER);
             stackTraceTitle.setAlignmentY(SwingConstants.CENTER);
-            stackTraceTitle.setFont(new FontUIResource("Label.font", Font.BOLD, 16));
+            stackTraceTitle.setFont(new FontUIResource(FONT_STRING, Font.BOLD, 16));
             add(stackTraceTitle, BorderLayout.NORTH);
             
             JTextArea textArea = new JTextArea();
             textArea.setWrapStyleWord(true);
             textArea.setLineWrap(true);
-            textArea.setFont(UIManager.getFont("Label.font"));
+            textArea.setFont(UIManager.getFont(FONT_STRING));
             textArea.setBorder(UIManager.getBorder("Label.border"));
             textArea.setOpaque(true);
             textArea.setEditable(false);
-            textArea.setFont(new FontUIResource("Label.font", Font.BOLD, 9));
+            textArea.setFont(new FontUIResource(FONT_STRING, Font.BOLD, 9));
             textArea.setText(root.getSettings().stackTrace());
             
             JScrollPane scrollTextArea = new JScrollPane(textArea);
@@ -129,6 +132,7 @@ public class DialogGUI {
     public static class ButtonPanel extends JPanel {
 
         public void initialize(JComponent parent, ErrorDialog root) {
+            removeAll();
             GridBagConstraints constraints = new GridBagConstraints();
             constraints.fill = GridBagConstraints.HORIZONTAL;
             constraints.insets = new Insets(0, 10, 5, 10);

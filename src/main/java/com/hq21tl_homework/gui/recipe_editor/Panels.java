@@ -17,6 +17,7 @@ import javax.swing.JSeparator;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 import com.hq21tl_homework.HintTextField;
 import com.hq21tl_homework.Locales;
@@ -105,6 +106,7 @@ public class Panels {
     }
     
     public static class RecipeEditorPanel extends JPanel implements guiInitializable<RecipeEditor>, Locales.LocalizationChangeListener{
+        
         private RecipeEditor root;
         private final JTabbedPane tabbedPane = new JTabbedPane();
         @Override
@@ -114,7 +116,6 @@ public class Panels {
             add(tabbedPane, BorderLayout.CENTER);
             update(-1);
 
-            //setBackground(Color.GREEN);
             GridBagConstraints constraints = new GridBagConstraints();
             constraints.gridx = 0;
             constraints.gridy = 1;
@@ -227,15 +228,16 @@ public class Panels {
 
     public static class WindowPanel extends JPanel implements guiInitializable<RecipeEditor>{
 
-        private static final TopPanel topPanel = new TopPanel();
-        private static final RecipeEditorPanel editorPanel = new RecipeEditorPanel();
-        private static final BottomPanel bottomPanel = new BottomPanel();
+        private final TopPanel topPanel = new TopPanel();
+        private final RecipeEditorPanel editorPanel = new RecipeEditorPanel();
+        private final BottomPanel bottomPanel = new BottomPanel();
 
         @Override
         public void initialize(JComponent parent, RecipeEditor root) {
+            removeAll();
             setLayout(new BorderLayout());
             topPanel.initialize(this, root);
-            add(new JSeparator(JSeparator.HORIZONTAL));
+            add(new JSeparator(SwingConstants.HORIZONTAL));
             editorPanel.initialize(this, root);
             bottomPanel.initialize(this, root);
             root.add(this, BorderLayout.CENTER);

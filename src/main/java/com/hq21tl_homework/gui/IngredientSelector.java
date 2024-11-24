@@ -7,6 +7,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -25,6 +26,7 @@ public class IngredientSelector extends JDialog{
     private final JPanel ingredientPanel = new JPanel();
 
     private void buildGUI(){
+        removeAll();
         setTitle(Locales.getString("IngredientSelector_Title"));
         setSize(200, 400);
         setMaximumSize(getSize());
@@ -140,12 +142,12 @@ public class IngredientSelector extends JDialog{
 
     private void listIngredients(){
         ingredientPanel.removeAll();
-        for (String ingredient : ingredientMap.keySet()) {
-            if (!ingredient.contains(searchTerm)) continue;
+        for (Entry<String, Boolean> ingredientEntry : ingredientMap.entrySet()) {
+            if (!ingredientEntry.getKey().toLowerCase().contains(searchTerm.toLowerCase()                                                                                                                                   )) continue;
 
             JCheckBox checkbox = new JCheckBox();
-            checkbox.setText(ingredient);
-            checkbox.setSelected(ingredientMap.get(ingredient));
+            checkbox.setText(ingredientEntry.getKey());
+            checkbox.setSelected(ingredientEntry.getValue());
             checkbox.addActionListener(l -> 
                 ingredientMap.put(checkbox.getText(), checkbox.isSelected())
             );

@@ -26,6 +26,7 @@ public class HintTextField<T extends JTextComponent> implements FocusListener, D
     public void initialize(){
         base.setText(hint);
         base.addFocusListener(this);
+        focusLost(null);
     }
     
     public void setHint(String hint) {
@@ -52,6 +53,7 @@ public class HintTextField<T extends JTextComponent> implements FocusListener, D
         }
         if(!isShowing && base.getText().isBlank()){
             isShowing = true;
+            base.setText(hint);
             base.setEditable(false);
         }
         
@@ -66,8 +68,8 @@ public class HintTextField<T extends JTextComponent> implements FocusListener, D
 
     public void setText(String t) {
         isShowing = (t.isBlank());
-        focusLost(null);
         base.setText(t.isBlank() ? "" : t);
+        focusLost(null);
     }
 
     @Override

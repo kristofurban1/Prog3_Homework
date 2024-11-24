@@ -5,7 +5,6 @@ import java.awt.Dialog;
 import java.awt.Dimension;
 
 import javax.swing.JDialog;
-import javax.swing.SwingConstants;
 
 import com.hq21tl_homework.Locales;
 import com.hq21tl_homework.gui.recipe_editor.Panels.WindowPanel;
@@ -16,9 +15,10 @@ public class RecipeEditor extends JDialog {
     public final transient RecipeEntry entry;
     public final transient RecipeEntry.RecipeEntryBuilder entryBuilder;
     public boolean cancelled = true;
-    private void buildGUI(){
+    private void buildGUI(){ 
         setTitle(Locales.getString("RecipeEditor_Title"));
         setMinimumSize(new Dimension(800, 400));
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setSize(1200, 800);
         setResizable(false);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);

@@ -50,6 +50,7 @@
     <string ID="RecipeEditor_Ingredients">Ingredients</string>
     <string ID="RecipeEditor_Instructions">Instructions</string>
     <string ID="RecipeEditor_DeleteRecipe">Delete Recipe</string>
+    <string ID="RecipeEditor_AddInstruction">Add Instruction</string>
 
 
     <string ID="LangSelector_Title">Language Selector</string>
