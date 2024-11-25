@@ -40,9 +40,8 @@ public class MenuItems {
 
     public static class AddRecipe implements ActionListener {
 
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            RecipeEditor editor = new RecipeEditor(null);
+        public void addRecipe(RecipeEntry prevAttempt){
+            RecipeEditor editor = new RecipeEditor(prevAttempt);
             RecipeEntry entry = editor.showGUI();
             if (entry == null) return; // cancelled
             if (entry.getName().isBlank()) return;
@@ -71,9 +70,17 @@ public class MenuItems {
                         .getRecipeBookInstance()
                         .updateRecipe(entry);
             }
+
+            // Reopen the editor recursively until user cancells, renames or overwrites.
+            else if (result == DialogResult.NO)
+                addRecipe(entry);
             
             StateContainer.EntryCollectionState.performUpdate();
             RecipeBook.exportRecipeBook(StateContainer.EntryCollectionState.getRecipeBookInstance(), Main.PERSISTENT_PATH); 
+        }
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            addRecipe(null);
         }
     }
 
