@@ -1,7 +1,4 @@
 <strings locale="en">
-    <string ID="Title">Window Title</string>
-    <string ID="Btn">OpenDialog</string>
-    
     <string ID="WindowTitle">Recipe Book</string>
     
     <string ID="Menu_File">File</string>
@@ -23,8 +20,6 @@
     <string ID="Searchbar_Clear">Clear</string>
     <string ID="Searchbar_IngredientSearch">Ingredient Search</string>
     
-    <string ID="StatusPanel_EntryCount">Number of entries: </string>
-
     <string ID="EntryContainer_Entry_View">View</string>
     <string ID="EntryContainer_Entry_Edit">Edit</string>
     <string ID="EntryContainer_CkeckAll">Select All</string>

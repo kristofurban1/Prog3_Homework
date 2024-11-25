@@ -10,7 +10,6 @@
     <string ID="Menu_Recipe">Recept</string>
     <string ID="Menu_Recipe_AddRecipeEntry">Új recept hozzáadása</string>
 
-    <string ID="Searchbar_SearchLabel">Keresés:</string>
     <string ID="Searchbar_SortCombo_Name"    >Név      </string>
     <string ID="Searchbar_SortCombo_Category">Kategória</string>
     <string ID="Searchbar_OrderCombo_Ascending" >Növekvő </string>
@@ -20,11 +19,10 @@
     <string ID="Searchbar_Search">Keresés</string>
     <string ID="Searchbar_Clear">Keresés törlés</string>
     <string ID="Searchbar_IngredientSearch">Hozzávaló keresés</string>
-    
-    <string ID="StatusPanel_EntryCount">Bejegyzések száma: </string>
 
     <string ID="EntryContainer_Entry_View">Megtekintés</string>
     <string ID="EntryContainer_Entry_Edit">Szerkesztés</string>
+    <string ID="EntryContainer_CkeckAll">Összes kiválasztása</string>
 
     <string ID="IngredientSelector_Title">Hozzávaló Választó</string>
     <string ID="IngredientSelector_SearchBtn">Keresés</string>
@@ -38,7 +36,7 @@
     <string ID="RecipeEditor_DescriptionHint">Leírás...</string>
     <string ID="RecipeEditor_OkBtn">OK</string>
     <string ID="RecipeEditor_CancelBtn">Mégse</string>
-    <string ID="RecipeEditor_DeleteBtn">Recept Törlés</string>
+    <string ID="RecipeEditor_DeleteBtn">Recept Bejegyztés Törlés</string>
     <string ID="RecipeEditor_DeleteBtn_Title">Megerősítés</string>
     <string ID="RecipeEditor_DeleteBtn_Message">Biztosan törölni akarod ezt a receptet?</string>
     
@@ -51,21 +49,28 @@
 
 
     <string ID="LangSelector_Title">Nyelv Választó</string>
-    <string ID="LangSelector_Label">NYelv: </string>
+    <string ID="LangSelector_Label">Nyelv: </string>
     <string ID="LangSelector_Ok">Ok</string>
     <string ID="LangSelector_Cancel">Mégse</string>
 
-    
-    <string ID="RecipeViewer_Title">Recept MEgtekintő</string>
+    <string ID="RecipeViewer_Title">Recept Megtekintő</string>
     <string ID="RecipeViewer_Close">Bezárás</string>
     <string ID="RecipeViewer_TabName">Recept </string>
     <string ID="RecipeViewer_Ingredients">Hozzávalók</string>
     <string ID="RecipeViewer_Instructions">Elkészítési lépések</string>
     <string ID="RecipeViewer_Multiplyer">Szorzó: </string>
-
-        
+ 
     <string ID="ErrorDialog_OK">Ok</string> 
     <string ID="ErrorDialog_Yes">Igen</string> 
     <string ID="ErrorDialog_No">Nem</string> 
     <string ID="ErrorDialog_Cancel">Mégse</string> 
+
+    <string ID="Export_NoSelection_Title">Nincs mit exportálni!</string>
+    <string ID="Export_NoSelection_Message">Válassz ki exportálandó bejegyzéseket.</string>
+
+    <string ID="Export_FileExists_Title">Fájl ütközés</string>
+    <string ID="Export_FileExists_Message">Fájl már létezik! Felül kívánod írni?</string>
+
+    <string ID="Import_Collision">Recept ütközés</string>
+    <string ID="Import_Collision_Message">Recept ilyen néven(%s) már létezik, ha felül kívánod írni nyomd meg az Igen gombot, ha át szeretné nevezni a Nem gombotm, ha ki szeretné hagyni a Mégse gombot!</string>
 </strings>
