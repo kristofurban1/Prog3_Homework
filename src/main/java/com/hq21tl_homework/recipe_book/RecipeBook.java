@@ -1,16 +1,26 @@
 package com.hq21tl_homework.recipe_book;
 
-import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class RecipeBook {
-    private final ArrayList<RecipeEntry> recipes;
+import com.hq21tl_homework.error_dialog.ErrorDialog;
+import com.hq21tl_homework.error_dialog.ErrorDialog.DialogBehaviour;
+import com.hq21tl_homework.error_dialog.ErrorDialog.DialogType;
+import com.hq21tl_homework.error_dialog.ErrorDialog.ErrorDialogSettings;
+import com.hq21tl_homework.error_dialog.ErrorDialog.ErrorLevel;
 
-    public RecipeBook(File sourceFile){
-        //TODO: Import recipebook
+public class RecipeBook implements Serializable{
+    private  final ArrayList<RecipeEntry> recipes;
+
+    public RecipeBook(){
         this.recipes = new ArrayList<>();
     }
 
@@ -20,6 +30,44 @@ public class RecipeBook {
         this.recipes.addAll(Arrays.asList(recipes));
         sortRecipes();
     }
+
+    public static RecipeBook importRecipeBook(String path){
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(path))){
+            return (RecipeBook)in.readObject();
+        }
+        catch (IOException | ClassNotFoundException e){
+            ErrorDialogSettings settings = new ErrorDialog.ErrorDialogSettings(
+                "RecipeBook import error.", 
+                ErrorLevel.FATAL, 
+                DialogType.OK,
+                DialogBehaviour.BLOCKING_DIALOG, 
+                "Failed to deserialize RecipeBook", 
+                String.join("\n", Arrays.toString(e.getStackTrace())));
+            ErrorDialog dialog = new ErrorDialog(settings);
+            dialog.showError();
+            System.exit(1);
+            return null;
+        }
+    }
+
+    public static void exportRecipeBook(RecipeBook recipeBook, String path){
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(path))){
+            out.writeObject(recipeBook);
+        }
+        catch (IOException e) {
+            ErrorDialogSettings settings = new ErrorDialog.ErrorDialogSettings(
+                "RecipeBook export error.", 
+                ErrorLevel.FATAL, 
+                DialogType.OK,
+                DialogBehaviour.BLOCKING_DIALOG, 
+                "Failed to serialize RecipeBook", 
+                String.join("\n", Arrays.toString(e.getStackTrace())));
+            ErrorDialog dialog = new ErrorDialog(settings);
+            dialog.showError();
+            System.exit(1);
+        }
+    }
+
 
     public RecipeEntry getRecipe(String recipeName){
         for (RecipeEntry recipeEntry : recipes) {
@@ -35,8 +83,9 @@ public class RecipeBook {
     public boolean addRecipe(RecipeEntry newEntry){
         // Filtering for duplicates
         for (RecipeEntry recipeEntry : recipes) {
-            if (recipeEntry.getName().equals(newEntry.getName()))
-                return false;
+            if (recipeEntry.getName().equals(newEntry.getName())){
+                return recipeEntry.equals(newEntry); // If it completely equals skip it. (True signals no intervention nessesery by the caller.)
+            }
         }
 
         recipes.add(newEntry);
@@ -108,4 +157,6 @@ public class RecipeBook {
         Collections.sort(quantifyers, Comparable::compareTo);
         return quantifyers.toArray(String[]::new);
     }
+
+    
 }

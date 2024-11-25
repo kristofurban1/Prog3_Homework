@@ -84,7 +84,7 @@ public class Panel {
     }
 
     public static class SearchBar extends JPanel implements guiInitializable<RecipeBookGUI>{
-        private final SearchField searchField = new SearchField();
+        private final transient SearchField searchField = new SearchField();
         private final SortAndSearchTypePanel sastPanel = new SortAndSearchTypePanel();
         private final SearchBtn searchBtn = new SearchBtn();
         private final ClearBtn clearBtn = new ClearBtn();

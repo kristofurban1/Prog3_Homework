@@ -1,15 +1,14 @@
 package com.hq21tl_homework.recipe_book;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import com.hq21tl_homework.recipe_book.Ingredient.IngredientBuilder;
 
-public class Recipe {
+public class Recipe implements Serializable {
     public static class RecipeBuilder {
-
-        
         public final List<IngredientBuilder> ingredients;
         public final List<String> instructions;
 
@@ -70,4 +69,35 @@ public class Recipe {
         }
         return true;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Recipe other){
+            int hasMatchIngredient = 0;
+            Outer: //NOSONAR no.
+            for (Ingredient ingr : ingredients){
+                for (Ingredient otherIngr : other.ingredients){
+                    if (ingr.preciseEquals(otherIngr)){
+                        hasMatchIngredient++;
+                        continue Outer;
+                    }
+                }
+            }
+
+            int hasMatchInstruction = 0;
+            Outer2: //NOSONAR no.
+            for (String instr : instructions){
+                for (String otherInstr : other.instructions){
+                    if (instr.equals(otherInstr)){
+                        hasMatchInstruction++;
+                        continue Outer2;
+                    }
+                }
+            }
+            return hasMatchIngredient == ingredients.length && hasMatchInstruction == instructions.length;
+        }
+        return false;
+    }
+
+    
 }

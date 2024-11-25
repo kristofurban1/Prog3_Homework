@@ -1,3 +1,71 @@
 <strings locale="hu">
-    <string ID=""></string>
+    <string ID="WindowTitle">Recept Könyv</string>
+    
+    <string ID="Menu_File">Fájl</string>
+    <string ID="Menu_File_Import">Importálás</string>
+    <string ID="Menu_File_Export">Exportálás</string>
+    <string ID="Menu_File_Preferences">Beállítások</string>
+    <string ID="Menu_File_Exit">Kilépés</string>
+
+    <string ID="Menu_Recipe">Recept</string>
+    <string ID="Menu_Recipe_AddRecipeEntry">Új recept hozzáadása</string>
+
+    <string ID="Searchbar_SearchLabel">Keresés:</string>
+    <string ID="Searchbar_SortCombo_Name"    >Név      </string>
+    <string ID="Searchbar_SortCombo_Category">Kategória</string>
+    <string ID="Searchbar_OrderCombo_Ascending" >Növekvő </string>
+    <string ID="Searchbar_OrderCombo_Descending">Csökkenő</string>
+    <string ID="Searchbar_RadioName">Név</string>
+    <string ID="Searchbar_RadioCategory">Kategória</string>
+    <string ID="Searchbar_Search">Keresés</string>
+    <string ID="Searchbar_Clear">Keresés törlés</string>
+    <string ID="Searchbar_IngredientSearch">Hozzávaló keresés</string>
+    
+    <string ID="StatusPanel_EntryCount">Bejegyzések száma: </string>
+
+    <string ID="EntryContainer_Entry_View">Megtekintés</string>
+    <string ID="EntryContainer_Entry_Edit">Szerkesztés</string>
+
+    <string ID="IngredientSelector_Title">Hozzávaló Választó</string>
+    <string ID="IngredientSelector_SearchBtn">Keresés</string>
+    <string ID="IngredientSelector_OkBtn">Ok</string>
+    <string ID="IngredientSelector_ToggleBtn">Kijelölés invertálás</string>
+    
+    <string ID="RecipeEditor_Title">Recept Szerkeztő</string>
+    
+    <string ID="RecipeEditor_NameHint">Név...</string>
+    <string ID="RecipeEditor_CategoryHint">Kategória...</string>
+    <string ID="RecipeEditor_DescriptionHint">Leírás...</string>
+    <string ID="RecipeEditor_OkBtn">OK</string>
+    <string ID="RecipeEditor_CancelBtn">Mégse</string>
+    <string ID="RecipeEditor_DeleteBtn">Recept Törlés</string>
+    <string ID="RecipeEditor_DeleteBtn_Title">Megerősítés</string>
+    <string ID="RecipeEditor_DeleteBtn_Message">Biztosan törölni akarod ezt a receptet?</string>
+    
+    <string ID="RecipeEditor_TabName">Recept </string>
+    <string ID="RecipeEditor_AddRecipe">Recept Hozzáadása</string>
+    <string ID="RecipeEditor_Ingredients">Hozzávalók</string>
+    <string ID="RecipeEditor_Instructions">Elkészítési lépések</string>
+    <string ID="RecipeEditor_DeleteRecipe">Recept Törlése</string>
+    <string ID="RecipeEditor_AddInstruction">Elkészítési lépés hozzáadása</string>
+
+
+    <string ID="LangSelector_Title">Nyelv Választó</string>
+    <string ID="LangSelector_Label">NYelv: </string>
+    <string ID="LangSelector_Ok">Ok</string>
+    <string ID="LangSelector_Cancel">Mégse</string>
+
+    
+    <string ID="RecipeViewer_Title">Recept MEgtekintő</string>
+    <string ID="RecipeViewer_Close">Bezárás</string>
+    <string ID="RecipeViewer_TabName">Recept </string>
+    <string ID="RecipeViewer_Ingredients">Hozzávalók</string>
+    <string ID="RecipeViewer_Instructions">Elkészítési lépések</string>
+    <string ID="RecipeViewer_Multiplyer">Szorzó: </string>
+
+        
+    <string ID="ErrorDialog_OK">Ok</string> 
+    <string ID="ErrorDialog_Yes">Igen</string> 
+    <string ID="ErrorDialog_No">Nem</string> 
+    <string ID="ErrorDialog_Cancel">Mégse</string> 
 </strings>

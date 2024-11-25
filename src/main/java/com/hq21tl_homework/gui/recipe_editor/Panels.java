@@ -209,7 +209,7 @@ public class Panels {
                 ErrorDialog.DialogResult result = dialog.showError();
                 if (result == DialogResult.YES){
                     StateContainer.EntryCollectionState
-                        .getRecipeBookInsatnce()
+                        .getRecipeBookInstance()
                         .removeRecipe(root.entry.getName());
                     root.dispose();
                 }

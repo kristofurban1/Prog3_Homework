@@ -13,7 +13,6 @@
     <string ID="Menu_Recipe">Recipe</string>
     <string ID="Menu_Recipe_AddRecipeEntry">Add Recipe Entry</string>
 
-    <string ID="Searchbar_SearchLabel">Search:</string>
     <string ID="Searchbar_SortCombo_Name"    >Name    </string>
     <string ID="Searchbar_SortCombo_Category">Category</string>
     <string ID="Searchbar_OrderCombo_Ascending" >Ascending </string>
@@ -28,6 +27,7 @@
 
     <string ID="EntryContainer_Entry_View">View</string>
     <string ID="EntryContainer_Entry_Edit">Edit</string>
+    <string ID="EntryContainer_CkeckAll">Select All</string>
 
     <string ID="IngredientSelector_Title">Ingridient Selector</string>
     <string ID="IngredientSelector_SearchBtn">Search</string>
@@ -58,17 +58,24 @@
     <string ID="LangSelector_Ok">Ok</string>
     <string ID="LangSelector_Cancel">Cancel</string>
 
-    <!-- 
-        <string ID="FileDialog_WindowName">File Dialog</string> 
-        <string ID="FileDialog_Navigate">Goasd</string> 
-        <string ID="FileDialog_NavigateBack">^asd</string> 
-        <string ID="FileDialog_PathLabel">Path: </string> 
-        <string ID="FileDialog_Confirm">OK</string> 
-        <string ID="FileDialog_Cancel">Cancel</string> 
-    -->
-        
+    <string ID="RecipeViewer_Title">Recipe Viewer</string>
+    <string ID="RecipeViewer_Close">Close</string>
+    <string ID="RecipeViewer_TabName">Recipe </string>
+    <string ID="RecipeViewer_Ingredients">Ingredients</string>
+    <string ID="RecipeViewer_Instructions">Instructions</string>
+    <string ID="RecipeViewer_Multiplyer">Multiplyer: </string>
+
     <string ID="ErrorDialog_OK">Ok</string> 
     <string ID="ErrorDialog_Yes">Yes</string> 
     <string ID="ErrorDialog_No">No</string> 
     <string ID="ErrorDialog_Cancel">Cancel</string> 
+
+    <string ID="Export_NoSelection_Title">Nothing to export!</string>
+    <string ID="Export_NoSelection_Message">Please select some entries to export!</string>
+
+    <string ID="Export_FileExists_Title">File Clash</string>
+    <string ID="Export_FileExists_Message">File already exists!\nDo you want to overwirite it?</string>
+
+    <string ID="Import_Collision">Recipe collision</string>
+    <string ID="Import_Collision_Message">Recipe entry with this name(%s) is already in the Recipe Book!\nDo you want to merge their recipes(Yes) or rename it(No)?\nSkip this entry by pressing Cancel! </string>
 </strings>

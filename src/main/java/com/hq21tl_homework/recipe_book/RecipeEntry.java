@@ -1,11 +1,12 @@
 package com.hq21tl_homework.recipe_book;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.hq21tl_homework.recipe_book.Recipe.RecipeBuilder;
 
-public class RecipeEntry {
+public class RecipeEntry implements Serializable {
     public static class RecipeEntryBuilder {
         public String name = "";
         public String category = "";
@@ -28,7 +29,9 @@ public class RecipeEntry {
         public RecipeEntry build(){
             List<Recipe> builtRecipe = new ArrayList<>();
             for (RecipeBuilder recipe : recipes) {
-                builtRecipe.add(recipe.build());
+                Recipe built = recipe.build();
+                if (builtRecipe.contains(built)) continue;
+                builtRecipe.add(built);
             }
             return new RecipeEntry(name, category, description, builtRecipe.toArray(Recipe[]::new));
         }
@@ -91,4 +94,30 @@ public class RecipeEntry {
         }
         return quantifyers.toArray(String[]::new);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof RecipeEntry other){
+            if (name.equals(other.name) &&
+                category.equals(other.category) &&
+                description.equals(other.description)){
+                // Basic stuff correct
+                int hasMatch = 0;
+                Outer: //NOSONAR no.
+                for (Recipe recipe : recipes){
+                    for (Recipe otherRecipe : other.recipes){
+                        if (recipe.equals(otherRecipe)){
+                            hasMatch++;
+                            continue Outer;
+                        }
+                    }
+                }
+                return hasMatch == recipes.length;
+            }
+
+        }
+        return false;
+    }
+
+    
 }

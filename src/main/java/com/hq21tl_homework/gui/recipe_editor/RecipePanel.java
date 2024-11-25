@@ -103,8 +103,7 @@ public class RecipePanel extends JPanel implements guiInitializable<RecipeEditor
         
         for (int i = 0; i < recipe.instructions.size(); i++) {
             JPanel entryPanel = new JPanel(new BorderLayout());
-            entryPanel.setPreferredSize(new Dimension(500, 50));
-            entryPanel.setMaximumSize(new Dimension(1000, 100));
+            entryPanel.setPreferredSize(new Dimension(500, 100));
             int num = i+1;
             JPanel side = new JPanel();
             String padding = ""; 
@@ -122,7 +121,7 @@ public class RecipePanel extends JPanel implements guiInitializable<RecipeEditor
             JTextArea instructionArea = new JTextArea();
             instructionArea.setText(recipe.instructions.get(i));
             instructionArea.setBorder(new BevelBorder(BevelBorder.RAISED, Color.GRAY.brighter(), Color.GRAY.darker()));
-            entryPanel.add(instructionArea, BorderLayout.CENTER);
+            entryPanel.add(new JScrollPane(instructionArea), BorderLayout.CENTER);
             instructionArea.getDocument().putProperty(INDEX, i);
             instructionArea.getDocument().addDocumentListener(instructionChange);
             instructionPanel.add(entryPanel);
@@ -149,7 +148,7 @@ public class RecipePanel extends JPanel implements guiInitializable<RecipeEditor
 
             JComboBox<String> name = new JComboBox<>();
             name.setEditable(true);
-            name.setModel(new DefaultComboBoxModel<>(StateContainer.EntryCollectionState.getRecipeBookInsatnce().getIngredients()));
+            name.setModel(new DefaultComboBoxModel<>(StateContainer.EntryCollectionState.getRecipeBookInstance().getIngredients()));
             name.setSelectedItem(ingredient.name);
             name.setBorder(new EmptyBorder(3,4,2,0));
             name.setPrototypeDisplayValue("                    ");
@@ -167,7 +166,7 @@ public class RecipePanel extends JPanel implements guiInitializable<RecipeEditor
 
             JComboBox<String> quantifyer = new JComboBox<>();
             quantifyer.setEditable(true);
-            quantifyer.setModel(new DefaultComboBoxModel<>(StateContainer.EntryCollectionState.getRecipeBookInsatnce().getQuantifyers()));
+            quantifyer.setModel(new DefaultComboBoxModel<>(StateContainer.EntryCollectionState.getRecipeBookInstance().getQuantifyers()));
             quantifyer.setSelectedItem(ingredient.quantifyer);
             quantifyer.setBorder(new EmptyBorder(3,4,2,4));
             quantifyer.setPreferredSize(new Dimension(60,30));

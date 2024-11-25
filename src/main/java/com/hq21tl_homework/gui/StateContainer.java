@@ -23,8 +23,6 @@ public class StateContainer {
     public static class RadioButtonState {
 
         private RadioButtonState() {}
-
-        private boolean state = false; // f: name ; t: category
         private RadioSearchName nameInstance = null;
         private RadioSearchCategory categoryInstance = null;
 
@@ -62,13 +60,7 @@ public class StateContainer {
 
         public void setState(JRadioButton instance) {
             if (!instanceVerify()) return;
-            if (instance instanceof RadioSearchName) {
-                state = false; 
-            }else if (instance instanceof RadioSearchCategory) {
-                state = true;
-            }else{
-                state = false;
-            }
+            boolean state = (instance instanceof RadioSearchCategory); // false if RadioSearchName
 
             nameInstance.setSelected(!state);
             categoryInstance.setSelected(state);
@@ -94,6 +86,7 @@ public class StateContainer {
         public static final RadioButtonState radioButtonState = new RadioButtonState(); 
         private static String[] ingridientFilter = null;
 
+        @SuppressWarnings("unchecked")
         public static void setInstance(Object instance){
             if (instance instanceof RecipeBook ins) {
                 recipeBookInstance = ins; 
@@ -114,7 +107,7 @@ public class StateContainer {
                 new ErrorDialog(
                     ErrorLevel.ERROR, 
                     "StateContainer - EntryCollectionState Error", 
-                    "Error: StateContainer.EntryCollectionState has been given an unknown instance: " + instance.getClass().toString())
+                    "Error: StateContainer.EntryCollectionState has been given an unknown instance: " + (instance != null ? instance.getClass().toString() : "null"))
                 .showError();
             }
 
@@ -128,7 +121,7 @@ public class StateContainer {
                 performUpdate();
         }
 
-        private static boolean instanceVerify(){
+        private static boolean instanceVerify(){ //NOSONAR
             if (recipeBookInstance == null ||
             recipeBookGUIInstance == null || 
             entryContainerInstance == null || 
@@ -165,6 +158,11 @@ public class StateContainer {
             return recipeBookGUIInstance;
         }
 
+        public static EntryContainer getEntryContainer(){
+            if (!instanceVerify()) return null;
+            return entryContainerInstance;
+        }
+
         public static void setSearchType(int type){
             searchType = type;
         }
@@ -174,7 +172,7 @@ public class StateContainer {
             ingridientFilter = filter;
         }
 
-        public static RecipeBook getRecipeBookInsatnce(){
+        public static RecipeBook getRecipeBookInstance(){
             if (!instanceVerify()) return null;
             return recipeBookInstance;
         }
@@ -193,7 +191,7 @@ public class StateContainer {
                 case 1 -> toDisplay = recipeBookInstance.filterRecipesByCategory(searchTerm.getText());
                 case 2 -> toDisplay = recipeBookInstance.filterRecipesByAvailableIngredients(Arrays.asList(ingridientFilter));
                 default -> {
-                    new ErrorDialog(ErrorLevel.ERROR, "State Container", "Filter by available ingridients has not been implemented yet.")
+                    new ErrorDialog(ErrorLevel.FATAL, "State Container", "Unknown searchType!")
                             .showError();
                     setSearchType(0);
                     performUpdate();

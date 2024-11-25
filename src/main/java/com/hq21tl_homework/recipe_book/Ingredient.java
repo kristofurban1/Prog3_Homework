@@ -1,6 +1,8 @@
 package com.hq21tl_homework.recipe_book;
 
-public class Ingredient {
+import java.io.Serializable;
+
+public class Ingredient implements Serializable {
     public static class IngredientBuilder {
         public String name = "";
         public double amount = 0;
@@ -47,6 +49,13 @@ public class Ingredient {
         if (obj instanceof Ingredient ingr)
             return name.equals(ingr.getName());
         else return false;
+    }
+
+    public boolean preciseEquals(Ingredient other){
+        return 
+            name.equals(other.name) &&
+            Double.compare(amount, other.amount) == 0 &&
+            quantifyer.equals(other.quantifyer);
     }
 
     @Override

@@ -26,9 +26,8 @@ public class IngredientSelector extends JDialog{
     private final JPanel ingredientPanel = new JPanel();
 
     private void buildGUI(){
-        removeAll();
         setTitle(Locales.getString("IngredientSelector_Title"));
-        setSize(200, 400);
+        setSize(300, 400);
         setMaximumSize(getSize());
         setResizable(false);
         setModalityType(Dialog.ModalityType.APPLICATION_MODAL);

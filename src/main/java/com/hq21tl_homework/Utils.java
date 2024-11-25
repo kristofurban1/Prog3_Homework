@@ -21,8 +21,15 @@ public class Utils {
         if (documentBuilder == null)
             documentBuilder = documentBuilderFactory.newDocumentBuilder(); 
         
-        
         return documentBuilder.parse(xmlFileStream);
+    }
+    public static Document newDocument() throws ParserConfigurationException{
+        if (documentBuilderFactory == null)
+            documentBuilderFactory = DocumentBuilderFactory.newInstance();
+        if (documentBuilder == null)
+            documentBuilder = documentBuilderFactory.newDocumentBuilder(); 
+        
+        return documentBuilder.newDocument();
     }
 
     public static class KeyValuePair<T, U>{

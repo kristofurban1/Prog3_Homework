@@ -60,7 +60,7 @@ public class SearchBarComponents {
             orderComboBox.initialize(this, root);
             radioSearchName.initialize(this, root);
             radioSearchCategory.initialize(this, root);
-            //setBackground(Color.green);
+            
             GridBagConstraints constraints = new GridBagConstraints();
             constraints.fill = GridBagConstraints.BOTH;
             constraints.gridx = 0;
@@ -303,7 +303,7 @@ public class SearchBarComponents {
         public void actionPerformed(ActionEvent e) {
             String[] ingredients = 
                 StateContainer.EntryCollectionState
-                .getRecipeBookInsatnce()
+                .getRecipeBookInstance()
                 .getIngredients();
             
             IngredientSelector selector = new IngredientSelector(ingredients);
