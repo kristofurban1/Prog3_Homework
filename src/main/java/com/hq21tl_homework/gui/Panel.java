@@ -36,7 +36,7 @@ public class Panel {
         
         private final JMenuItem menuAddRecipeEntry = new JMenuItem();
         @Override
-        public void initialize(JComponent parent, RecipeBookGUI root) {
+        public void initialize(JComponent parent, RecipeBookGUI root){
             
             localizationChanged();
             fileMenu.add(menuImport);
@@ -64,6 +64,7 @@ public class Panel {
             constraints.weighty = 0.02;
             
             parent.add(this, constraints);
+            Locales.eventHandler.addValueChangeListener(this);
         }
 
         @Override
@@ -78,7 +79,6 @@ public class Panel {
             recipeMenu.setText(Locales.getString("Menu_Recipe"));
             
             menuAddRecipeEntry.setText(Locales.getString("Menu_Recipe_AddRecipeEntry"));
-            //menuIngridientCollection.setText(Locales.getString("Menu_Recipe_IngridientCollection"));
 
         }
     }
