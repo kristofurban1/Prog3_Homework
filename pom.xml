@@ -27,4 +27,16 @@
             </plugin>
         </plugins>
     </build>
+
+
+    <dependencies>
+    
+
+        <dependency>
+            <groupId>org.junit</groupId>
+            <artifactId>surefire-junit5</artifactId>
+            <version>5.0.0-ALPHA</version>
+        </dependency>
+
+    </dependencies>
 </project>
