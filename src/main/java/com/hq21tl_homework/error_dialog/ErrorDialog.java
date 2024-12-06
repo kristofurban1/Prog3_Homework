@@ -16,6 +16,9 @@ import com.hq21tl_homework.error_dialog.DialogGUI.WindowPanel;
 
 public class ErrorDialog extends JDialog {
 
+    /**
+     * Error levels for the ErrorDialog
+     */
     public enum ErrorLevel {
         INFO,
         WARNING,
@@ -23,17 +26,26 @@ public class ErrorDialog extends JDialog {
         FATAL
     }
 
+    /**
+     * Should the dialog block the rest of the GUI or not
+     */
     public enum DialogBehaviour {
         BLOCKING_DIALOG,
         NON_BLOCKING_DIALOG
     }
 
+    /**
+     * What type pf input should the dialog ask from user
+     */
     public enum DialogType {
         OK,
         YES_NO,
         YES_NO_CANCEL
     }
 
+    /**
+     * The resulting option the user choose
+     */
     public enum DialogResult {
         OK,
         YES,
@@ -68,6 +80,15 @@ public class ErrorDialog extends JDialog {
         return new ImageIcon(image);
     }
 
+    /**
+     * Setup for a new ErrorDialog
+     * errorTitle - Title of the window
+     * errorLevel - Severity of the error
+     * dialogType - Response from user
+     * dialogBehavivoiur - blocking/non-blocking dialog
+     * message - Body of the error
+     * stackTrace - If the exception that fires the ErrorDialog has stackTrace, and the dev wants to expose it. Set to NULL to hide.
+     */
     public record ErrorDialogSettings(
             String errorTitle,
             ErrorLevel errorLevel,
@@ -92,15 +113,17 @@ public class ErrorDialog extends JDialog {
 
     private void guiBuiler() {
         if (hasStackTrace) {
-            setMinimumSize(new Dimension(400, 500)); 
-        }else {
+            setMinimumSize(new Dimension(400, 500));
+        } else {
             setMinimumSize(new Dimension(400, 200));
         }
         setMaximumSize(getMinimumSize());
 
-        if (settings.dialogBehaviour == DialogBehaviour.BLOCKING_DIALOG)
-            setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
-        else setModalityType(Dialog.ModalityType.MODELESS);
+        if (settings.dialogBehaviour == DialogBehaviour.BLOCKING_DIALOG) {
+            setModalityType(Dialog.ModalityType.APPLICATION_MODAL); 
+        }else {
+            setModalityType(Dialog.ModalityType.MODELESS);
+        }
 
         setLayout(new BorderLayout());
         setTitle(settings.errorTitle);
@@ -116,26 +139,43 @@ public class ErrorDialog extends JDialog {
         this.pack();
     }
 
+    /**
+     * @param settings ErrorDialogSettings containing all parameters for the
+     * ErrorDialog
+     */
     public ErrorDialog(ErrorDialogSettings settings) {
         this.settings = settings;
         this.hasStackTrace = (settings.stackTrace != null);
         guiBuiler();
     }
 
-    public ErrorDialog(ErrorLevel level, String title, String message){
-        ErrorDialogSettings presetSettings =  new ErrorDialogSettings(
-            title, 
-            level, 
-            DialogType.OK, 
-            DialogBehaviour.BLOCKING_DIALOG, 
-            message, 
-            null
-            );
+    /**
+     * Quick ErrorDialog without all settings within ErrorDialogSettings
+     *
+     * @param level ErrorLevel
+     * @param title Title of the dialog window
+     * @param message Content of the error This dialog is a non-blocking dialog
+     * with OK response, and null stacktrace.
+     */
+    public ErrorDialog(ErrorLevel level, String title, String message) {
+        ErrorDialogSettings presetSettings = new ErrorDialogSettings(
+                title,
+                level,
+                DialogType.OK,
+                DialogBehaviour.BLOCKING_DIALOG,
+                message,
+                null
+        );
         this.settings = presetSettings;
         this.hasStackTrace = (presetSettings.stackTrace != null);
         guiBuiler();
     }
 
+    /**
+     * Show error to user and get response.
+     *
+     * @return DialogResult: The user's response
+     */
     public DialogResult showError() {
         setVisible(true);
         return dialogResult;

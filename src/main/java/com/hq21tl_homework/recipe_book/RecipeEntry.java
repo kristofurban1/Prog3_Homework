@@ -7,6 +7,11 @@ import java.util.List;
 import com.hq21tl_homework.recipe_book.Recipe.RecipeBuilder;
 
 public class RecipeEntry implements Serializable {
+
+    /**
+     * Allows temporary modification of a RecipeEntry.
+     * After modification is complete it can be built into an RecipeEntry.
+     */
     public static class RecipeEntryBuilder {
         public String name = "";
         public String category = "";
@@ -26,6 +31,9 @@ public class RecipeEntry implements Serializable {
             }
         }
 
+        /**
+         * @return A RecipeEntry object, containing all information set in Builder
+         */
         public RecipeEntry build(){
             List<Recipe> builtRecipe = new ArrayList<>();
             for (RecipeBuilder recipe : recipes) {
@@ -35,6 +43,10 @@ public class RecipeEntry implements Serializable {
             }
             return new RecipeEntry(name, category, description, builtRecipe.toArray(Recipe[]::new));
         }
+        
+        /**
+         * Removes recipes that are invalid (RecipeBuilder::cleanup)
+         */
         public void cleanup() {
             recipes.removeIf(r -> r.cleanup());
         }
@@ -68,12 +80,20 @@ public class RecipeEntry implements Serializable {
         return recipes;
     }
 
+    /**
+     * @param filter List of strings that are ingredient names
+     * @return Returns true if has at least one recipe which satisfyes condition. (Recipe::hasIngridients)
+     */
     public boolean hasIngridients(List<String> filter){
         for (Recipe recipe : recipes) {
             if (recipe.hasIngridients(filter)) return true;
         }
         return false;
     }
+
+    /**
+     * @return Distinct list of all ingredients used in this recipeEntry.
+     */
     public String[] getIngredients(){
         ArrayList<String> ingredients = new ArrayList<>();
         for (Recipe recipe : recipes) {
@@ -84,6 +104,10 @@ public class RecipeEntry implements Serializable {
         }
         return ingredients.toArray(String[]::new);
     }
+
+    /**
+     * @return Distinct list of all quantifyers used in this recipeEntry.
+     */
     public String[] getQuantifyers(){
         ArrayList<String> quantifyers = new ArrayList<>();
         for (Recipe recipe : recipes) {

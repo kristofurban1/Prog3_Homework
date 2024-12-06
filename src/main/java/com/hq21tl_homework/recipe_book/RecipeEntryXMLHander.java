@@ -55,6 +55,11 @@ public class RecipeEntryXMLHander {
     }
 
 
+    /**
+     * Deserializes an XML file serialized by exportRecipe
+     * @param importFile File to deserialize into RecipeEntry
+     * @return RecipeEntry containing data from importFile
+     */
     public static RecipeEntry importRecipe(File importFile){ //NOSONAR // Its fineeeee
         Document doc;
         try {
@@ -165,6 +170,12 @@ public class RecipeEntryXMLHander {
         entryBuilder.cleanup();
         return entryBuilder.build();
     }
+
+    /**
+     * Serializes an XML file.
+     * @param entry RecipeEntry to serialize
+     * @return File handler to the serialized XML.
+     */
     public static File exportRecipe(RecipeEntry entry){
         Document xmlDoc;
         try {

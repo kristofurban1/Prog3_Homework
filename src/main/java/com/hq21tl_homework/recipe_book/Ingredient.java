@@ -3,6 +3,11 @@ package com.hq21tl_homework.recipe_book;
 import java.io.Serializable;
 
 public class Ingredient implements Serializable {
+
+    /**
+     * Allows temporary modification of an Ingredient.
+     * After modification is complete it can be built into an Ingredient.
+     */
     public static class IngredientBuilder {
         public String name = "";
         public double amount = 0;
@@ -15,9 +20,17 @@ public class Ingredient implements Serializable {
             quantifyer = baseEntry.getQuantifyer();
         }
 
+        /**
+         * @return An Ingredient object, containing all information set in Builder
+         */
         public Ingredient build(){
             return new Ingredient(name, amount, quantifyer);
         }
+        
+        /**
+         * Cleans up ingredients that are invalid.
+         * @return True if this builder is invalid (name is blank).
+         */
         public boolean cleanup() {
             return name.isBlank();
         }

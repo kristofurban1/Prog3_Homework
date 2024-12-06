@@ -8,6 +8,11 @@ import java.util.List;
 import com.hq21tl_homework.recipe_book.Ingredient.IngredientBuilder;
 
 public class Recipe implements Serializable {
+
+    /**
+     * Allows temporary modification of a Recipe.
+     * After modification is complete it can be built into an Recipe.
+     */
     public static class RecipeBuilder {
         public final List<IngredientBuilder> ingredients;
         public final List<String> instructions;
@@ -25,6 +30,9 @@ public class Recipe implements Serializable {
             instructions.addAll(Arrays.asList(baseEntry.getInstructions()));
         }
 
+        /**
+         * @return A Recipe object, containing all information set in Builder
+         */
         public Recipe build(){
             List<Ingredient> builtIngredient = new ArrayList<>();
             for (IngredientBuilder i : ingredients) {
@@ -33,6 +41,11 @@ public class Recipe implements Serializable {
             return new Recipe(builtIngredient.toArray(Ingredient[]::new), instructions.toArray(String[]::new));
         }
 
+        /**
+         * Cleans up recipes that are invalid.
+         * Also removes ingredients that are invalid (IngredientBuilder::cleanup), and blank Instructions
+         * @return True if this builder is invalid (has no ingredients nor instructions).
+         */
         public boolean cleanup() {
             ingredients.removeIf(i -> i.cleanup());
             instructions.removeIf(String::isBlank);
@@ -51,6 +64,10 @@ public class Recipe implements Serializable {
     public Ingredient[] getIngredients() {
         return ingredients;
     }
+
+    /**
+     * @return Distinct list of all quantifyers used in this recipe.
+     */
     public String[] getQuantifyers() {
         ArrayList<String> quantifyers = new ArrayList<>();
         for (Ingredient ingredient : ingredients) {
@@ -63,6 +80,10 @@ public class Recipe implements Serializable {
         return instructions;
     }
 
+    /**
+     * @param filter List of strings that are ingredient names.
+     * @return True if this recipe's ingredients are all in the filter. (Filter contains all ingredients)
+     */
     public boolean hasIngridients(List<String> filter){
         for (Ingredient ingredient : ingredients) {
             if (!filter.contains(ingredient.getName())) return false;
